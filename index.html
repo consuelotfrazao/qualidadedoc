@@ -2,7 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1b4332">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="QualidadeDoc">
+<meta name="description" content="Ferramenta gratuita de automação de documentos de qualidade hospitalar — POPs, IT, IP, Fluxograma e FMEA.">
 <title>QualidadeDoc — Nutrição Hospitalar | Consuelo Frazão</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -33,14 +39,68 @@
   .hero p{color:var(--ink2);font-size:0.9rem;max-width:540px;margin:0 auto;line-height:1.6;}
 
   /* EXAMPLE BUTTONS */
-  .examples-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;padding:14px 18px;background:var(--gold-light);border:1px solid var(--gold);border-radius:12px;}
+  .examples-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;padding:14px 18px;background:var(--gold-light);border:1px solid var(--gold);border-radius:12px;-webkit-overflow-scrolling:touch;}
   .examples-bar .label{font-size:0.75rem;font-weight:700;color:#5c3d00;width:100%;margin-bottom:2px;letter-spacing:0.3px;}
-  .ex-btn{padding:7px 14px;border-radius:20px;border:1px solid var(--gold);background:var(--surface);color:#5c3d00;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+  .ex-btn{padding:7px 14px;border-radius:20px;border:1px solid var(--gold);background:var(--surface);color:#5c3d00;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;white-space:nowrap;position:relative;}
+  .ex-btn:hover{background:var(--gold);color:var(--accent2);}
+  .ex-btn.active{background:var(--accent2);color:#fff;border-color:var(--accent2);}
+  .ex-btn::after{content:'✕';position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;background:#c0392b;color:#fff;font-size:0.6rem;font-weight:900;line-height:16px;text-align:center;display:none;pointer-events:none;}
+  .ex-btn:hover::after{display:block;}
+  .xbtn{display:none;margin-left:4px;color:#c0392b;font-size:0.7rem;font-weight:900;cursor:pointer;pointer-events:all;}
+  .ex-btn:hover .xbtn{display:inline;}
+  .ex-btn.active .xbtn{color:rgba(255,255,255,0.7);}
   .ex-btn:hover{background:var(--gold);color:var(--accent2);}
   .ex-btn.active{background:var(--accent2);color:#fff;border-color:var(--accent2);}
 
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
-  @media(max-width:800px){.grid{grid-template-columns:1fr;}}
+
+  @media(max-width:800px){
+    header{padding:12px 16px;}
+    .logo{font-size:1.2rem;}
+    .author-bar{padding:8px 16px;flex-wrap:wrap;gap:6px;}
+    .author-bar .li-icon{display:none;}
+    .container{padding:14px 12px;}
+    .hero{margin-bottom:16px;}
+    .hero h1{font-size:1.35rem;}
+    .hero p{font-size:0.84rem;}
+    .how-to{gap:12px;padding:12px 14px;}
+    .how-step{min-width:100%;}
+    .examples-bar{padding:12px 12px;gap:6px;}
+    .ex-btn{padding:9px 14px;font-size:0.82rem;min-height:38px;}
+    .grid{grid-template-columns:1fr;gap:14px;}
+    .card-body{padding:12px 12px;}
+    .card-header{padding:10px 12px;}
+    .row2{grid-template-columns:1fr;}
+    input[type="text"],select,textarea{font-size:0.92rem;padding:10px 12px;min-height:44px;}
+    textarea{min-height:90px;}
+    select{min-height:44px;}
+    label{font-size:0.82rem;margin-bottom:5px;}
+    .btn-primary{padding:14px;font-size:0.95rem;min-height:48px;}
+    .btn-sm{padding:9px 14px;font-size:0.8rem;min-height:40px;}
+    .doc-tabs{padding:8px 8px 0;gap:2px;}
+    .doc-tab{padding:9px 10px;font-size:0.74rem;min-height:38px;}
+    .doc-content{padding:12px 12px;font-size:0.84rem;}
+    .doc-toolbar{padding:10px 10px;gap:6px;}
+    .doc-toolbar .btn-sm{flex:1;justify-content:center;font-size:0.76rem;padding:9px 6px;}
+    .pop-item{padding:10px 10px;}
+    .pop-name{font-size:0.84rem;}
+    .fmea-table{font-size:0.72rem;}
+    .fmea-table th,.fmea-table td{padding:5px 6px;}
+    .fluxo-step{width:90%;font-size:0.8rem;}
+    .novo-pop-btn{font-size:0.76rem;padding:7px 12px;}
+    .modal-box{max-height:95vh;border-radius:12px;}
+    .modal-body{padding:14px 14px;}
+    .modal-footer{padding:12px 14px;}
+    .tags-input{min-height:50px;}
+    .progress-bar{gap:3px;}
+    footer{padding:16px 12px;font-size:0.72rem;}
+  }
+
+  @media(max-width:400px){
+    .hero h1{font-size:1.15rem;}
+    .doc-tab{padding:8px 7px;font-size:0.7rem;}
+    .ex-btn{font-size:0.76rem;padding:8px 10px;}
+  }
 
   .card{background:var(--surface);border:1px solid var(--border);border-radius:13px;overflow:hidden;}
   .card-header{padding:12px 16px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--border);background:var(--surface2);}
@@ -62,8 +122,34 @@
   .btn-sm{padding:5px 12px;font-size:0.74rem;background:var(--surface2);border:1px solid var(--border);color:var(--ink2);}
   .btn-sm:hover{background:var(--border);}
   .btn-gold{background:var(--gold);color:var(--accent2);}
+  /* MODAL NOVO POP */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;}
+  .modal-box{background:var(--surface);border-radius:16px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
+  .modal-header{background:var(--accent2);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;}
+  .modal-header h2{font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;}
+  .modal-close{background:none;border:none;color:rgba(255,255,255,0.7);font-size:1.4rem;cursor:pointer;line-height:1;padding:0 4px;}
+  .modal-close:hover{color:#fff;}
+  .modal-body{padding:20px;}
+  .modal-step{margin-bottom:18px;}
+  .modal-step-title{font-size:0.72rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--accent2);border-bottom:1px solid var(--accent-light);padding-bottom:4px;margin-bottom:10px;}
+  .modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;background:var(--surface2);border-radius:0 0 16px 16px;flex-wrap:wrap;}
+  .tags-input{display:flex;flex-wrap:wrap;gap:5px;padding:7px 10px;background:var(--bg);border:1px solid var(--border);border-radius:7px;min-height:42px;cursor:text;}
+  .tags-input:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,106,79,0.1);}
+  .tag-item{background:var(--accent-light);color:var(--accent2);border-radius:20px;padding:2px 10px 2px 8px;font-size:0.76rem;font-weight:600;display:flex;align-items:center;gap:4px;}
+  .tag-item button{background:none;border:none;cursor:pointer;color:var(--accent2);font-size:0.9rem;line-height:1;padding:0;}
+  .tag-placeholder{font-size:0.82rem;color:var(--ink3);}
+  .progress-bar{display:flex;gap:4px;margin-bottom:18px;}
+  .progress-step{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background 0.3s;}
+  .progress-step.done{background:var(--accent);}
+  .progress-step.active{background:var(--gold);}
+  .step-panel{display:none;}.step-panel.active{display:block;}
+  .hint{font-size:0.74rem;color:var(--ink3);margin-top:3px;line-height:1.5;}
+  .novo-pop-btn{background:var(--accent2);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
+  .novo-pop-btn:hover{background:var(--accent);}
 
-  .doc-tabs{display:flex;gap:3px;padding:9px 13px 0;background:var(--surface2);border-bottom:1px solid var(--border);overflow-x:auto;}
+
+  .doc-tabs{display:flex;gap:3px;padding:9px 13px 0;background:var(--surface2);border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .doc-tabs::-webkit-scrollbar{display:none;}
   .doc-tab{padding:6px 12px;font-size:0.75rem;font-weight:600;border:1px solid var(--border);border-bottom:none;border-radius:6px 6px 0 0;background:var(--surface2);color:var(--ink3);cursor:pointer;white-space:nowrap;transition:all 0.15s;}
   .doc-tab.active{background:var(--surface);color:var(--accent2);}
   .doc-tab .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;background:var(--border);}
@@ -88,6 +174,8 @@
   .pop-list{margin-top:9px;display:flex;flex-direction:column;gap:6px;}
   .pop-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.15s;}
   .pop-item:hover{border-color:var(--accent);background:var(--accent-light);}
+  .del-lib{background:none;border:none;cursor:pointer;color:var(--ink3);font-size:0.9rem;font-weight:700;padding:2px 5px;border-radius:4px;line-height:1;transition:color 0.15s;}
+  .del-lib:hover{color:var(--warn);}
   .pop-name{font-size:0.82rem;font-weight:600;}.pop-meta{font-size:0.7rem;color:var(--ink3);margin-top:1px;}
   .pop-status{font-size:0.66rem;font-weight:700;letter-spacing:0.5px;padding:2px 7px;border-radius:20px;}
   .status-complete{background:var(--accent-light);color:var(--accent2);}
@@ -173,14 +261,19 @@
 
   <!-- EXAMPLES BAR -->
   <div class="examples-bar">
-    <div class="label">📂 POPs disponíveis — clique para carregar:</div>
-    <button class="ex-btn" onclick="loadExample('avaliacao')">🥗 Avaliação Nutricional na Admissão</button>
-    <button class="ex-btn" onclick="loadExample('higienizacao')">🙌 Higienização das Mãos</button>
-    <button class="ex-btn" onclick="loadExample('suplemento_oral')">💊 Prescrição e Acompanhamento de Suplementação Oral</button>
-    <button class="ex-btn" onclick="loadExample('visitaleito')">🛏️ Visita Beira Leito do Nutricionista</button>
-    <button class="ex-btn" onclick="loadExample('suplementacao')">🧃 Indicação de Suplementação Nutricional</button>
-    <button class="ex-btn" onclick="loadExample('aceitacao')">📊 Controle de Aceitação de Dieta</button>
-    <button class="ex-btn" onclick="loadExample('enteral')">🔬 Preparo de Dieta Enteral</button>
+    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:4px"><div class="label" style="margin:0">📂 POPs prontos — clique para carregar instantaneamente:</div><button class="novo-pop-btn" onclick="abrirModalNovoPOP()">➕ Criar meu POP</button></div>
+    <div style="width:100%;font-size:0.72rem;color:#7a5800;margin-bottom:4px;font-weight:600">🥗 Nutrição Clínica</div>
+    <button class="ex-btn" onclick="loadExample('avaliacao')" data-key="avaliacao">🥗 Avaliação Nutricional na Admissão<span class="xbtn" data-del="avaliacao"> ✕</span></button></button>
+    <button class="ex-btn" onclick="loadExample('visitaleito')" data-key="visitaleito">🛏️ Visita Beira Leito<span class="xbtn" data-del="visitaleito"> ✕</span></button></button>
+    <button class="ex-btn" onclick="loadExample('suplemento_oral')" data-key="suplemento_oral">💊 Prescrição de Suplementação Oral<span class="xbtn" data-del="suplemento_oral"> ✕</span></button></button>
+    <button class="ex-btn" onclick="loadExample('suplementacao')" data-key="suplementacao">🧃 Indicação de Suplementação<span class="xbtn" data-del="suplementacao"> ✕</span></button></button>
+    <button class="ex-btn" onclick="loadExample('aceitacao')" data-key="aceitacao">📊 Controle de Aceitação de Dieta<span class="xbtn" data-del="aceitacao"> ✕</span></button></button>
+    <button class="ex-btn" onclick="loadExample('enteral')" data-key="enteral">🔬 Preparo de Dieta Enteral<span class="xbtn" data-del="enteral"> ✕</span></button></button>
+    <div style="width:100%;font-size:0.72rem;color:#7a5800;margin-top:6px;margin-bottom:4px;font-weight:600">🏥 Outros setores</div>
+    <button class="ex-btn" onclick="loadExample('higienizacao')" data-key="higienizacao">🙌 Higienização das Mãos<span class="xbtn" data-del="higienizacao"> ✕</span></button></button>
+    <button class="ex-btn" onclick="loadExample('cme')" data-key="cme">⚙️ Esterilização de Materiais (CME)<span class="xbtn" data-del="cme"> ✕</span></button></button>
+    <button class="ex-btn" onclick="loadExample('uti')" data-key="uti">🫀 Controle de Infecção em UTI<span class="xbtn" data-del="uti"> ✕</span></button></button>
+    <button class="ex-btn" onclick="loadExample('ambulatorio')" data-key="ambulatorio">🩺 Triagem Nutricional Ambulatorial<span class="xbtn" data-del="ambulatorio"> ✕</span></button></button>
   </div>
 
   <div class="grid">
@@ -217,7 +310,22 @@
               </select>
             </div>
           </div>
-          <div style="display:flex;gap:8px;margin-top:4px">
+          <!-- GERAR COM IA -->
+          <div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <label style="margin:0;font-size:0.77rem;color:var(--ink2)">✨ Quer gerar documentos com IA para seu POP?</label>
+              <button onclick="toggleApiPanel()" style="background:none;border:none;cursor:pointer;font-size:0.72rem;color:var(--accent);text-decoration:underline;padding:0">Como funciona?</button>
+            </div>
+            <div id="apiPanel" style="display:none;background:var(--gold-light);border:1px solid var(--gold);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:0.75rem;color:#5c3d00;line-height:1.7">
+              <strong>3 passos simples:</strong><br>
+              1. Crie conta gratuita em <strong>console.anthropic.com</strong><br>
+              2. Gere uma chave de API (começa com <code>sk-ant-</code>)<br>
+              3. Cole abaixo — ela <strong>não é salva</strong> em nenhum servidor ✓
+            </div>
+            <input type="password" id="apiKey" placeholder="Cole sua chave de API aqui (sk-ant-...)" style="font-size:0.75rem;font-family:monospace;width:100%;margin-bottom:7px" />
+            <button class="btn btn-primary" onclick="generateDocs()" style="font-size:0.84rem;padding:10px">✨ Gerar documentos com IA</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px">
             <button class="btn btn-sm" onclick="savePOP()" style="flex:1">💾 Salvar na biblioteca</button>
             <button class="btn btn-sm" onclick="clearForm()">🗑️ Limpar</button>
           </div>
@@ -451,12 +559,44 @@ document.getElementById('popDesc').addEventListener('input', function () {
 // ══════════════════════════════════════════════════════════════════
 // LOAD EXAMPLE
 // ══════════════════════════════════════════════════════════════════
+document.querySelector('.examples-bar').addEventListener('click', function(e) {
+  const xbtn = e.target.closest('.xbtn');
+  if(!xbtn) return;
+  e.stopPropagation();
+  const key = xbtn.getAttribute('data-del');
+  if(!key) return;
+  if(!confirm('Remover este POP da barra?')) return;
+  delete POPS[key];
+  const btn = document.querySelector('.ex-btn[data-key="' + key + '"]');
+  if(btn) btn.remove();
+});
+
+function removeExemplo(key, e) {
+  e.stopPropagation();
+  if(!confirm('Remover este POP da barra?')) return;
+  delete POPS[key];
+  document.querySelector('.ex-btn[data-key="' + key + '"]').remove();
+}
+
+function adicionarBotaoRemover(btn) {
+  if(btn.querySelector('.remover-pop')) return;
+  const key = btn.getAttribute('data-key');
+  if(!key) return;
+  const span = document.createElement('span');
+  span.className = 'remover-pop';
+  span.title = 'Remover da barra';
+  span.textContent = '✕';
+  span.addEventListener('click', function(e) { removeExemplo(key, e); });
+  btn.appendChild(span);
+}
+
 function loadExample(key) {
   const p = POPS[key];
   if (!p) return;
   activeExample = key;
   document.querySelectorAll('.ex-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  const btn = document.querySelector('.ex-btn[data-key="' + key + '"]');
+  if(btn) btn.classList.add('active');
   document.getElementById('popCode').value  = p.meta.code;
   document.getElementById('popRev').value   = p.meta.rev;
   document.getElementById('popTitle').value = p.meta.title;
@@ -621,12 +761,520 @@ function clearForm() {
   ['it','ip','fluxo','fmea'].forEach(t=>{ document.getElementById(`placeholder-${t}`).style.display=''; document.getElementById(`content-${t}`).style.display='none'; document.querySelector(`[data-tab="${t}"]`).classList.remove('ready'); });
   hideToolbar();
 }
+function deletarPOP(id) {
+  pops = pops.filter(function(x) { return x.id !== id; });
+  localStorage.setItem('qualidadedoc_pops', JSON.stringify(pops));
+  renderPOPList();
+}
+
 function renderPOPList() {
-  const el=document.getElementById('popList');
-  if(!pops.length){ el.innerHTML='<div style="text-align:center;padding:14px;color:var(--ink3);font-size:0.78rem">Nenhum POP salvo ainda.<br>Carregue um exemplo e salve!</div>'; return; }
-  el.innerHTML=pops.map(p=>`<div class="pop-item" onclick="loadPOP(${p.id})"><div><div class="pop-name">${p.code} — ${p.title}</div><div class="pop-meta">${p.setor||'—'} · ${p.date}</div></div><div style="display:flex;align-items:center;gap:6px"><span class="pop-status status-${p.status}">${p.status==='complete'?'✓ Completo':'Novo'}</span><button class="btn btn-sm" onclick="deletePOP(${p.id},event)" style="padding:2px 7px;font-size:0.66rem">✕</button></div></div>`).join('');
+  const el = document.getElementById('popList');
+  el.innerHTML = '';
+  if(!pops.length) {
+    el.innerHTML = '<div style="text-align:center;padding:14px;color:var(--ink3);font-size:0.78rem">Nenhum POP salvo ainda.<br>Carregue um exemplo e salve!</div>';
+    return;
+  }
+  pops.forEach(function(p) {
+    const div = document.createElement('div');
+    div.className = 'pop-item';
+    div.style.cssText = 'display:flex;align-items:center;justify-content:space-between;';
+
+    // Lado esquerdo — info
+    const info = document.createElement('div');
+    info.style.flex = '1';
+    info.style.cursor = 'pointer';
+    info.innerHTML =
+      '<div class="pop-name">' + p.code + ' — ' + p.title + '</div>' +
+      '<div class="pop-meta">' + (p.setor||'—') + ' · ' + p.date + '</div>';
+    info.addEventListener('click', function() { loadPOP(p.id); });
+
+    // Lado direito — status + botão apagar
+    const acoes = document.createElement('div');
+    acoes.style.cssText = 'display:flex;align-items:center;gap:6px;flex-shrink:0;';
+
+    const status = document.createElement('span');
+    status.className = 'pop-status status-' + p.status;
+    status.textContent = p.status === 'complete' ? '✓ Completo' : 'Novo';
+
+    const btnDel = document.createElement('button');
+    btnDel.className = 'del-lib';
+    btnDel.textContent = '✕';
+    btnDel.title = 'Remover da biblioteca';
+    btnDel.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // Mostrar confirmação inline no próprio card
+      div.innerHTML = '';
+      div.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:8px 12px;gap:8px;background:#fce8df;border:1px solid #f5c0a0;border-radius:8px;';
+      const msg = document.createElement('span');
+      msg.style.cssText = 'font-size:0.78rem;color:#7a2800;';
+      msg.textContent = 'Remover "' + p.title + '"?';
+      const sim = document.createElement('button');
+      sim.className = 'btn btn-sm';
+      sim.style.cssText = 'background:#b5451b;color:#fff;border:none;font-size:0.74rem;padding:4px 10px;';
+      sim.textContent = 'Sim, remover';
+      sim.addEventListener('click', function() { deletarPOP(p.id); });
+      const nao = document.createElement('button');
+      nao.className = 'btn btn-sm';
+      nao.style.fontSize = '0.74rem';
+      nao.textContent = 'Cancelar';
+      nao.addEventListener('click', function() { renderPOPList(); });
+      div.appendChild(msg);
+      div.appendChild(sim);
+      div.appendChild(nao);
+    });
+
+    acoes.appendChild(status);
+    acoes.appendChild(btnDel);
+    div.appendChild(info);
+    div.appendChild(acoes);
+    el.appendChild(div);
+  });
 }
 renderPOPList();
+
+// ── TOGGLE API PANEL ──────────────────────────────────────────────
+function toggleApiPanel() {
+  const p = document.getElementById('apiPanel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+}
+
+// ── GERAR COM IA ──────────────────────────────────────────────────
+async function generateDocs() {
+  const apiKey = (document.getElementById('apiKey').value || '').trim();
+  if (!apiKey) {
+    alert('Para gerar um POP novo com IA, cole sua chave de API no campo acima.\n\nCrie uma conta gratuita em console.anthropic.com');
+    return;
+  }
+  const title = document.getElementById('popTitle').value.trim();
+  const desc  = document.getElementById('popDesc').value.trim();
+  if (!title || !desc) { alert('Preencha ao menos o Título e a Descrição do processo.'); return; }
+
+  const meta = getMeta();
+  currentMeta = meta;
+
+  const btn = document.querySelector('button[onclick="generateDocs()"]');
+  btn.disabled = true; btn.textContent = '⏳ Gerando...';
+
+  ['it','ip','fluxo','fmea'].forEach(t => {
+    document.getElementById('placeholder-' + t).style.display = '';
+    document.getElementById('placeholder-' + t).innerHTML = '<div class="loading"><div class="spinner"></div><div class="loading-text">Gerando ' + t.toUpperCase() + '...</div></div>';
+    document.getElementById('content-' + t).style.display = 'none';
+    document.querySelector('[data-tab="' + t + '"]').classList.remove('ready');
+  });
+  hideToolbar();
+
+  const prompt = `Você é especialista em qualidade hospitalar. Com base no POP abaixo, gere documentos de qualidade em JSON puro (sem markdown, sem backticks).
+
+POP:
+- Título: ${meta.title}
+- Setor: ${meta.setor}
+- Responsável: ${meta.resp}
+- Objetivo: ${document.getElementById('popObj').value || 'Não informado'}
+- Normas: ${document.getElementById('popNorma').value || 'Não informadas'}
+- Descrição: ${desc}
+
+Retorne exatamente este JSON:
+{"it":{"objetivo":"","aplicabilidade":"","materiais":["","","","",""],"passos":["","","","","","",""],"criticos":["","",""],"normas":""},"ip":{"entradas":["","",""],"atividades":["","","",""],"saidas":["","",""],"indicadores":["","",""],"responsabilidades":["","",""],"registros":["",""]},"fluxo":[{"tipo":"inicio","label":"INÍCIO","sub":""},{"tipo":"processo","label":"","sub":""},{"tipo":"decisao","label":"?","sub":""},{"tipo":"processo","label":"","sub":""},{"tipo":"processo","label":"","sub":""},{"tipo":"fim","label":"FIM","sub":""}],"fmea":[{"etapa":"","falha":"","efeito":"","causa":"","acao":"","g":7,"o":5,"d":4},{"etapa":"","falha":"","efeito":"","causa":"","acao":"","g":8,"o":3,"d":5},{"etapa":"","falha":"","efeito":"","causa":"","acao":"","g":6,"o":4,"d":3},{"etapa":"","falha":"","efeito":"","causa":"","acao":"","g":9,"o":2,"d":4}]}`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4000, messages: [{ role: 'user', content: prompt }] })
+    });
+    const data = await response.json();
+    if (data.error) throw new Error(data.error.message);
+    const raw = data.content.map(b => b.text || '').join('');
+    const json = JSON.parse(raw.replace(/```json|```/g, '').trim());
+    renderIT(json.it, meta); renderIP(json.ip, meta); renderFluxo(json.fluxo, meta); renderFMEA(json.fmea, meta);
+    generatedDocs = json;
+    revealToolbar(); switchTab('it');
+  } catch(err) {
+    alert('Erro: ' + err.message);
+    ['it','ip','fluxo','fmea'].forEach(t => {
+      document.getElementById('placeholder-' + t).innerHTML = '<div class="placeholder"><div class="big-icon">❌</div><p>Erro ao gerar. Verifique sua chave e tente novamente.</p></div>';
+    });
+  }
+  btn.disabled = false; btn.textContent = '✨ Gerar documentos com IA';
+}
+
+// ── NOVOS POPs — CME, UTI, AMBULATÓRIO ───────────────────────────
+POPS['cme'] = {
+  meta:{ code:'POP-CME-001', rev:'Rev. 02', title:'Esterilização de Materiais Médico-Hospitalares (CME)', setor:'Central de Material e Esterilização (CME)', resp:'Enfermeiro(a) da CME', norma:'RDC ANVISA 15/2012 · RDC 63/2011 · NR-32 · ABNT NBR ISO 17665', freq:'anual',
+    obj:'Garantir o processamento seguro e eficaz de artigos médico-hospitalares na CME, prevenindo infecções relacionadas à assistência à saúde por meio da esterilização adequada.',
+    desc:'Recebimento e classificação de artigos · Pré-lavagem e limpeza · Inspeção e empacotamento · Esterilização por autoclave ou EO · Controles biológicos e químicos · Armazenamento e distribuição · Rastreabilidade' },
+  it:{ objetivo:'Padronizar o processamento de artigos médico-hospitalares na CME, garantindo limpeza, desinfecção e esterilização eficazes, com rastreabilidade completa de todos os ciclos de esterilização.',
+    aplicabilidade:'Aplica-se a todos os artigos críticos e semicríticos encaminhados à CME provenientes de qualquer setor da instituição, processados pela equipe da CME sob supervisão do enfermeiro responsável.',
+    materiais:['Detergente enzimático multienzimático (conforme especificação do fabricante)','Autoclave de vapor saturado (classe B) com registros calibrados','Embalagens adequadas: grau cirúrgico (papel/TNT), caixas metálicas, bolsas de Tyvek','Integrador químico interno classe 5 e indicador externo classe 1','Indicador biológico (Geobacillus stearothermophilus) para validação do ciclo','EPIs: avental impermeável, luvas de borracha grossas, óculos e máscara PFF2','Sistema informatizado de rastreabilidade (etiquetas com lote, data e validade)'],
+    passos:['Receber os artigos da unidade: conferir quantidade, identificação e estado de conservação. Separar por tipo: crítico (contato com tecido estéril), semicrítico (mucosa) e não crítico.','Realizar pré-limpeza imediata após o uso (ainda na unidade geradora): imersão em solução enzimática por 5–10 minutos para evitar ressecamento de matéria orgânica.','Limpeza manual ou mecanizada na CME: escovar todas as superfícies, reentrâncias e lumens com detergente enzimático; enxaguar abundantemente com água tratada.','Inspeção visual: verificar integridade (trincas, corrosão, falhas de articulação), funcionalidade e limpeza de cada artigo — devolver com relatório qualquer artigo danificado.','Empacotar conforme o método de esterilização: papel grau cirúrgico termossoldado, caixas metálicas com filtro ou contêiner rígido. Incluir indicador interno classe 5 em cada pacote.','Identificar com etiqueta: nome do artigo, setor de origem, data de esterilização, validade, número do lote e iniciais do técnico responsável.','Esterilizar no ciclo adequado: autoclave vapor 134°C/4 min (artigos termorresistentes) ou EtO (artigos termossensíveis). Registrar todos os parâmetros do ciclo.','Verificar indicadores após o ciclo: indicador químico externo (mudança de cor) e interno (classe 5). Executar teste biológico semanal — aguardar resultado antes de liberar o lote.','Armazenar em área limpa, seca, protegida de luz direta, com temperatura e umidade controladas. Respeitar PEPS (primeiro a entrar, primeiro a sair).','Distribuir com registro de saída: setor destinatário, data, artigo e número do lote — garantindo rastreabilidade completa.'],
+    criticos:['NUNCA utilizar artigo com indicador químico negativo (sem mudança de cor) — devolver para reprocessamento imediato.','Teste biológico positivo: RECOLHER TODO O LOTE e notificar a CCIH e a chefia imediatamente — risco de infecção em múltiplos pacientes.','Artigo com embalagem violada, úmida ou rasgada após esterilização = artigo contaminado — não utilizar, reprocessar.','Rastreabilidade obrigatória: todo artigo deve ter lote registrado no prontuário do paciente — exigência da RDC 15/2012.'],
+    normas:'RDC ANVISA 15/2012 (processamento de artigos) · RDC 63/2011 (serviços de saúde) · ABNT NBR ISO 17665 (esterilização a vapor) · NR-32 (Segurança em Saúde)' },
+  ip:{ entradas:['Artigos médico-hospitalares encaminhados pelos setores com guia de encaminhamento','Insumos: detergente enzimático, embalagens grau cirúrgico, indicadores químicos e biológicos','Equipamentos calibrados: autoclave, seladora, pHmetro'],
+    atividades:['Recebimento, classificação e pré-limpeza dos artigos','Limpeza mecanizada ou manual com detergente enzimático e inspeção','Empacotamento com indicadores e identificação com rastreabilidade','Esterilização com registro completo dos parâmetros do ciclo','Controle de qualidade: indicadores químicos e biológicos','Armazenamento e distribuição com registro de saída'],
+    saidas:['Artigos esterilizados com rastreabilidade documentada (lote, data, validade)','Registro dos parâmetros de cada ciclo de esterilização arquivado','Relatório semanal de testes biológicos','Notificação imediata em caso de falha de ciclo ou indicador positivo'],
+    indicadores:['Taxa de rejeição de artigos por falha no processamento (meta: ≤2%)','% de ciclos com todos os parâmetros dentro do especificado (meta: 100%)','Resultado dos testes biológicos semanais (meta: 100% negativos)','Tempo médio de processamento por lote (monitoramento mensal)'],
+    responsabilidades:['Técnico de Enfermagem da CME: limpeza, empacotamento e operação da autoclave','Enfermeiro da CME: supervisão, controle de qualidade e liberação dos lotes','CCIH: auditoria dos registros e investigação de falhas','Engenharia Clínica: calibração e manutenção preventiva da autoclave','Gestão: garantia de insumos e estrutura física adequada'],
+    registros:['Ficha de registro de ciclo de esterilização (parâmetros, lote, operador)','Resultado dos testes biológicos com data e número do lote','Registro de distribuição com setor destinatário e lote','Relatório de artigos rejeitados e devoluções'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Artigo encaminhado à CME'},{tipo:'processo',label:'Receber e classificar artigo',sub:'Crítico · semicrítico · não crítico'},{tipo:'processo',label:'Pré-limpeza e limpeza',sub:'Detergente enzimático · escovação · enxágue'},{tipo:'processo',label:'Inspeção visual',sub:'Integridade · funcionalidade · limpeza'},{tipo:'decisao',label:'Artigo aprovado?',sub:'Sem danos ou sujidade'},{tipo:'processo',label:'Devolver com relatório',sub:'Artigo danificado ou mal limpo'},{tipo:'processo',label:'Empacotar + indicador interno',sub:'Identificar com etiqueta de rastreabilidade'},{tipo:'processo',label:'Esterilizar ciclo adequado',sub:'Vapor 134°C ou EtO — registrar parâmetros'},{tipo:'decisao',label:'Indicadores OK?',sub:'Químico + biológico'},{tipo:'processo',label:'Recolher lote + notificar CCIH',sub:'Falha no ciclo'},{tipo:'processo',label:'Armazenar e distribuir',sub:'PEPS · ambiente controlado · registro saída'},{tipo:'fim',label:'FIM',sub:'Artigo disponível para uso'}],
+  fmea:[{etapa:'Limpeza',falha:'Matéria orgânica residual após limpeza',efeito:'Falha na esterilização — artigo não estéril',causa:'Tempo insuficiente ou técnica incorreta',acao:'Inspeção visual obrigatória pós-limpeza; teste de limpeza periódico',g:9,o:5,d:4},{etapa:'Indicador biológico',falha:'Teste biológico não realizado na semana',efeito:'Falha de ciclo não detectada; risco de IRAS',causa:'Falta de insumos ou esquecimento',acao:'Cronograma semanal fixo; estoque mínimo de indicadores',g:9,o:3,d:3},{etapa:'Rastreabilidade',falha:'Lote não registrado no prontuário do paciente',efeito:'Impossibilidade de rastreio em caso de falha',causa:'Falta de integração entre CME e prontuário eletrônico',acao:'Etiqueta de lote colada na ficha do procedimento; auditoria mensal',g:7,o:6,d:5},{etapa:'Armazenamento',falha:'Artigo estéril armazenado em área úmida',efeito:'Contaminação e perda da esterilidade',causa:'Estrutura física inadequada; falta de controle ambiental',acao:'Termohigrômetro na área de estocagem; inspeção diária',g:8,o:4,d:4}]
+};
+
+POPS['uti'] = {
+  meta:{ code:'POP-UTI-001', rev:'Rev. 01', title:'Prevenção de Infecção de Corrente Sanguínea Associada a Cateter (ICSAC) na UTI', setor:'UTI Adulto / Pediátrica', resp:'Enfermeiro(a) da UTI / CCIH', norma:'ANVISA Nota Técnica 01/2013 · Bundle ICSAC · RDC 36/2013 · CDC Guidelines', freq:'semestral',
+    obj:'Prevenir infecções de corrente sanguínea associadas a cateter venoso central (CVC) na UTI por meio da implementação rigorosa do bundle de inserção e manutenção do CVC.',
+    desc:'Bundle de inserção do CVC (5 medidas) · Higienização das mãos · Barreira máxima de precaução · Clorexidina 2% para antissepsia · Checklist diário de manutenção · Revisão diária da necessidade do cateter · Cuidados com curativo · Registro e monitoramento de ICSAC' },
+  it:{ objetivo:'Prevenir infecções de corrente sanguínea associadas ao cateter venoso central (ICSAC) na UTI mediante aplicação sistematizada do bundle de inserção e do protocolo de manutenção diária, reduzindo a densidade de incidência de ICSAC para metas internacionais.',
+    aplicabilidade:'Aplica-se a todos os pacientes com cateter venoso central (CVC) internados na UTI, envolvendo médicos na inserção e equipe de enfermagem na manutenção diária.',
+    materiais:['Kit de CVC estéril com campo fenestrado grande','Clorexidina alcoólica 0,5% para antissepsia da pele (inserção) e 2% para curativo','Gorro, máscara cirúrgica, avental estéril e luvas estéreis (barreira máxima)','Curativo transparente semipermeável estéril','Checklist de inserção e manutenção do CVC (impresso ou digital)','Álcool gel 70% e sabonete antisséptico para higiene das mãos','Clorexidina 2% gluconato para curativo a cada 7 dias (ou conforme protocolo)'],
+    passos:['INSERÇÃO — Higienizar as mãos com clorexidina antes do procedimento.','Aplicar barreira máxima de precaução: gorro, máscara, avental estéril e luvas estéreis para o médico; campo estéril grande cobrindo o paciente inteiro.','Antissepsia da pele com clorexidina alcoólica 0,5%: movimentos circulares do centro para a periferia; aguardar secagem completa (mínimo 30 segundos).','Preferir subclávia ou jugular interna; evitar acesso femoral (maior risco de infecção).','Confirmar posicionamento por radiografia antes do primeiro uso; registrar no checklist de inserção com assinatura de todos os presentes.','MANUTENÇÃO DIÁRIA — Revisar DIARIAMENTE a necessidade do cateter: retirar o CVC assim que não for mais necessário — cada dia de cateter desnecessário é risco adicional.','Higienizar as mãos antes e após qualquer manipulação do CVC.','Inspecionar o sítio de inserção: sinais de infecção local (calor, rubor, edema, secreção) — notificar enfermeiro e médico imediatamente.','Trocar curativo: a cada 7 dias (transparente semipermeável) ou imediatamente se úmido, sujo ou descolado. Usar clorexidina 2% para limpeza do sítio.','Desinfectar hubs e conectores com álcool 70% por 15 segundos (scrub do hub) antes de qualquer acesso.','Registrar no checklist diário: data de inserção, sítio, dias de cateter, aspecto do sítio e conduta.'],
+    criticos:['CVC FEMORAL: evitar sempre que possível — taxa de ICSAC até 3x maior que subclávia. Usar apenas em emergência com plano de migração documentado.','NÃO acelerar a antissepsia — clorexidina precisa de tempo de contato adequado para agir: aguardar SEMPRE a secagem completa.','Revisão diária de necessidade é OBRIGATÓRIA: CVC desnecessário é o principal fator de risco evitável para ICSAC.','Qualquer suspeita de ICSAC (febre sem foco, calafrios após acesso ao CVC): coletar hemoculturas de periférico e pelo CVC ANTES de antibiótico e notificar CCIH.'],
+    normas:'ANVISA Nota Técnica GVIMS 01/2013 · Bundle ICSAC (IHI) · CDC Guidelines for CRBSI 2011 · RDC 36/2013 · Protocolo CCIH institucional' },
+  ip:{ entradas:['Paciente com indicação de CVC e prescrição médica','Kit de CVC estéril e EPIs disponíveis','Checklist de inserção preenchido antes do início do procedimento'],
+    atividades:['Inserção com barreira máxima e antissepsia padronizada (bundle de 5 medidas)','Revisão diária da necessidade do cateter pela equipe médica e de enfermagem','Inspeção e curativo do sítio de inserção conforme protocolo','Scrub do hub antes de cada acesso ao CVC','Monitoramento e notificação de suspeita de ICSAC à CCIH'],
+    saidas:['CVC inserido com checklist completo e assinado','Registro diário de inspeção do sítio e dias de cateter','Notificação imediata de suspeita de ICSAC com hemocultura coletada','Relatório mensal de densidade de incidência de ICSAC por setor'],
+    indicadores:['Densidade de incidência de ICSAC por 1.000 cateter-dia (meta: ≤ 1,5/1.000 CVC-dia)','% de inserções com checklist completo (meta: 100%)','Média de dias de CVC por paciente (meta de redução contínua)','% de revisão diária de necessidade documentada (meta: 100%)'],
+    responsabilidades:['Médico intensivista: inserção com bundle, indicação e revisão diária de necessidade','Enfermeiro da UTI: manutenção, inspeção diária, curativo e checklist','Técnico de Enfermagem: scrub do hub, observação e comunicação de alterações','CCIH: monitoramento da densidade de ICSAC, auditoria e feedback mensal','Gestão: garantia de insumos do bundle disponíveis 24h'],
+    registros:['Checklist de inserção do CVC (arquivado no prontuário)','Registro diário de inspeção do sítio e dias de cateter','Ficha de notificação de ICSAC à CCIH','Relatório mensal de densidade de incidência por UTI'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Indicação de CVC pelo médico'},{tipo:'processo',label:'Higienizar mãos + barreira máxima',sub:'Gorro · máscara · avental · luvas estéreis'},{tipo:'processo',label:'Antissepsia com clorexidina 0,5%',sub:'Aguardar secagem completa'},{tipo:'processo',label:'Inserir CVC — preferir subclávia/jugular',sub:'Evitar acesso femoral'},{tipo:'processo',label:'Confirmar posição por RX',sub:'Antes do primeiro uso'},{tipo:'processo',label:'Preencher checklist de inserção',sub:'Assinatura de todos os presentes'},{tipo:'processo',label:'Revisão diária de necessidade',sub:'Retirar assim que possível'},{tipo:'processo',label:'Inspeção do sítio + scrub do hub',sub:'A cada acesso ao CVC'},{tipo:'decisao',label:'Sinais de infecção local?',sub:'Calor · rubor · secreção'},{tipo:'processo',label:'Notificar médico + CCIH',sub:'Coletar hemocultura ANTES do ATB'},{tipo:'processo',label:'Troca de curativo',sub:'A cada 7 dias ou se sujo/descolado'},{tipo:'fim',label:'FIM',sub:'Retirada do CVC quando indicação cessada'}],
+  fmea:[{etapa:'Antissepsia na inserção',falha:'Clorexidina aplicada sem aguardar secagem',efeito:'Redução da eficácia antisséptica; risco de ICSAC',causa:'Pressa durante o procedimento',acao:'Cronometragem do tempo de contato; checklist com item de secagem',g:8,o:6,d:4},{etapa:'Revisão diária',falha:'Necessidade do CVC não revisada diariamente',efeito:'CVC mantido além do necessário; risco aumentado de ICSAC',causa:'Ausência de item específico no round diário',acao:'Item obrigatório no round multidisciplinar diário; checklist digital',g:8,o:5,d:4},{etapa:'Scrub do hub',falha:'Hub acessado sem desinfecção prévia',efeito:'Contaminação intraluminal; ICSAC',causa:'Urgência; desconhecimento da técnica',acao:'Treinamento semestral; álcool 70% em swab disponível em cada leito',g:9,o:5,d:5},{etapa:'Curativo',falha:'Curativo não trocado quando úmido ou solto',efeito:'Contaminação do sítio de inserção',causa:'Sobrecarga da equipe; não observação',acao:'Inspeção do curativo em cada turno documentada no checklist',g:7,o:5,d:4}]
+};
+
+POPS['ambulatorio'] = {
+  meta:{ code:'POP-AMB-001', rev:'Rev. 01', title:'Triagem e Acompanhamento Nutricional Ambulatorial', setor:'Ambulatório de Nutrição', resp:'Nutricionista Responsável', norma:'CFN Res. 600/2018 · Diretrizes BRASPEN · Mini Avaliação Nutricional (MAN)', freq:'anual',
+    obj:'Padronizar a triagem, avaliação nutricional e acompanhamento de pacientes no ambulatório, garantindo condutas individualizadas, seguras e baseadas em evidências para manutenção ou recuperação do estado nutricional.',
+    desc:'Triagem nutricional na primeira consulta · Avaliação completa do estado nutricional · Anamnese alimentar · Cálculo de necessidades · Prescrição dietética individualizada · Plano alimentar · Educação nutricional · Monitoramento de retorno' },
+  it:{ objetivo:'Padronizar o atendimento nutricional ambulatorial desde a triagem até o acompanhamento longitudinal, garantindo avaliação sistematizada, prescrição dietética individualizada e educação nutricional eficaz para cada paciente.',
+    aplicabilidade:'Aplica-se a todos os pacientes adultos, idosos e pediátricos atendidos no ambulatório de nutrição, em consulta inicial ou de retorno, independentemente da patologia de base.',
+    materiais:['Balança digital calibrada e estadiômetro','Fita métrica inelástica e adipômetro','Formulário de triagem nutricional (MAN para idosos; MUST para adultos)','Anamnese alimentar estruturada com recordatório 24h ou questionário de frequência alimentar','Software ou tabela de composição nutricional (TACO / TBCA)','Material educativo: guia alimentar, pirâmide, listas de substituição','Prontuário eletrônico ou ficha de atendimento com CRN'],
+    passos:['Acolher o paciente: apresentar-se, explicar o atendimento, criar vínculo terapêutico.','Realizar triagem nutricional: aplicar MUST (adultos) ou MAN (idosos) para classificar o risco nutricional logo na primeira consulta.','Coletar anthropometria: peso, estatura, IMC, circunferência da cintura, do braço e panturrilha (idosos); comparar com avaliações anteriores se disponível.','Realizar anamnese alimentar detalhada: recordatório 24h de dias típicos e atípicos; questionário de frequência alimentar; preferências, aversões, intolerâncias e alergias; hábitos de preparo e consumo fora de casa.','Avaliar condição clínica: patologia de base, medicamentos em uso (interações com alimentos), sintomas GI, capacidade funcional e nível de atividade física.','Calcular necessidades calórico-proteicas individualizadas e comparar com a ingestão habitual identificada na anamnese.','Elaborar plano alimentar individualizado: adequado à patologia, preferências, rotina e condição socioeconômica do paciente; usar linguagem acessível.','Realizar educação nutricional: orientar sobre grupos alimentares, leitura de rótulos, substituições saudáveis, hidratação e atividade física; utilizar material visual.','Definir metas nutricionais de curto e médio prazo com o paciente (autonomia e adesão).','Agendar retorno: 30 dias (casos de risco alto), 60–90 dias (acompanhamento regular); registrar todos os dados no prontuário com CRN e assinatura.'],
+    criticos:['Verificar SEMPRE interações alimento-medicamento: anticoagulantes × vitamina K; IMAO × tiramina; estatinas × grapefruit; comunicar ao médico quando necessário.','Não elaborar plano alimentar sem anamnese completa — risco de conduta inadequada à realidade e patologia do paciente.','Paciente com perda de peso involuntária > 5% em 1 mês ou > 10% em 6 meses: investigar causa e acionar equipe médica — pode indicar doença grave não diagnosticada.','Manter confidencialidade absoluta dos dados alimentares e clínicos do paciente — dever ético do nutricionista (CFN).'],
+    normas:'CFN Resolução 600/2018 · Diretrizes BRASPEN/SBNEP 2023 · Guia Alimentar para a População Brasileira (MS) · TACO (UNICAMP) · MUST / MAN' },
+  ip:{ entradas:['Paciente agendado com guia de encaminhamento ou demanda espontânea','Exames laboratoriais e relatório médico (quando disponíveis)','Ficha de anamnese pré-consulta preenchida pelo paciente (quando possível)'],
+    atividades:['Triagem nutricional e avaliação anthropométrica completa','Anamnese alimentar com recordatório 24h e questionário de frequência','Avaliação clínica: patologia, medicamentos e sintomas GI','Cálculo de necessidades e elaboração do plano alimentar individualizado','Educação nutricional e definição de metas com o paciente','Registro em prontuário e agendamento de retorno'],
+    saidas:['Diagnóstico nutricional registrado com classificação de risco','Plano alimentar individualizado entregue ao paciente em linguagem acessível','Registro completo da consulta no prontuário com CRN e assinatura','Encaminhamento a outros profissionais quando necessário (médico, psicólogo, fonoaudiólogo)'],
+    indicadores:['% de pacientes com triagem nutricional realizada na primeira consulta (meta: 100%)','Taxa de retorno agendado e cumprido (meta: ≥70%)','% de consultas com plano alimentar registrado no prontuário (meta: 100%)','Satisfação do paciente com o atendimento (pesquisa semestral)'],
+    responsabilidades:['Nutricionista: triagem, avaliação, prescrição, educação e registro','Recepção: agendamento, coleta de dados pré-consulta e orientação sobre documentos','Médico solicitante: fornecer relatório clínico e laudos de exames atualizados','Equipe multidisciplinar: comunicação de alterações clínicas que impactem a dieta'],
+    registros:['Ficha de atendimento nutricional ambulatorial com CRN e assinatura (por consulta)','Plano alimentar impresso ou digital entregue ao paciente','Registro de encaminhamentos realizados','Relatório estatístico mensal de atendimentos por patologia e desfecho'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Paciente chega ao ambulatório'},{tipo:'processo',label:'Acolhimento e triagem nutricional',sub:'MUST (adultos) · MAN (idosos)'},{tipo:'processo',label:'Anthropometria completa',sub:'Peso · estatura · IMC · circunferências'},{tipo:'processo',label:'Anamnese alimentar',sub:'Recordatório 24h · frequência · hábitos'},{tipo:'processo',label:'Avaliação clínica',sub:'Patologia · medicamentos · sintomas GI'},{tipo:'processo',label:'Calcular necessidades',sub:'Calorias · proteínas · micronutrientes'},{tipo:'decisao',label:'Perda de peso > 5% em 1 mês?',sub:'Ou > 10% em 6 meses'},{tipo:'processo',label:'Investigar causa + acionar médico',sub:'Comunicação imediata'},{tipo:'processo',label:'Elaborar plano alimentar',sub:'Individualizado · linguagem acessível'},{tipo:'processo',label:'Educação nutricional + metas',sub:'Autonomia e adesão do paciente'},{tipo:'processo',label:'Registrar no prontuário + CRN',sub:'Agendar retorno (30–90 dias)'},{tipo:'fim',label:'FIM',sub:'Retorno conforme risco nutricional'}],
+  fmea:[{etapa:'Anamnese alimentar',falha:'Recordatório 24h não representativo do padrão habitual',efeito:'Plano alimentar inadequado à realidade do paciente',causa:'Dia atípico coletado; ausência de dias de final de semana',acao:'Coletar mínimo 2 dias não consecutivos; perguntar sobre variações de rotina',g:6,o:7,d:5},{etapa:'Interação alimento-medicamento',falha:'Interação não identificada na anamnese',efeito:'Redução da eficácia do medicamento ou toxicidade',causa:'Anamnese medicamentosa incompleta',acao:'Campo obrigatório de medicamentos na ficha; tabela de interações disponível no consultório',g:8,o:4,d:5},{etapa:'Perda de peso involuntária',falha:'Sinal de alerta não identificado ou não comunicado ao médico',efeito:'Atraso no diagnóstico de doença grave',causa:'Ausência de comparação com peso anterior; critério não padronizado',acao:'Critério explícito na ficha; registro do peso anterior obrigatório; comunicação ao médico documentada',g:9,o:3,d:4},{etapa:'Plano alimentar',falha:'Plano inadequado à condição socioeconômica do paciente',efeito:'Não adesão e abandono do acompanhamento',causa:'Ausência de avaliação do contexto social na anamnese',acao:'Incluir avaliação socioeconômica e de acesso a alimentos na anamnese',g:5,o:6,d:5},{etapa:'Retorno',falha:'Consulta de retorno não agendada',efeito:'Abandono do acompanhamento nutricional',causa:'Falta de rotina de agendamento ao final da consulta',acao:'Agendamento obrigatório antes do paciente sair; lembrete por WhatsApp/SMS',g:5,o:7,d:5}]
+};
+
+
+// ══════════════════════════════════════════════════════════════
+// MODAL NOVO POP — WIZARD 4 PASSOS
+// ══════════════════════════════════════════════════════════════
+let stepAtual = 1;
+const totalSteps = 4;
+const tagData = { materiais:[], passos:[], criticos:[], entradas:[], atividades:[], saidas:[], indicadores:[], fluxo:[] };
+let fmeaItens = [];
+
+function abrirModalNovoPOP() {
+  stepAtual = 1;
+  Object.keys(tagData).forEach(k => tagData[k] = []);
+  fmeaItens = [];
+  ['n_code','n_rev','n_title','n_setor','n_resp','n_obj','n_norma','n_emoji'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.value = '';
+  });
+  Object.keys(tagData).forEach(k => renderTags(k));
+  document.getElementById('fmeaItens').innerHTML = '';
+  renderStep();
+  document.getElementById('modalNovoPOP').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharModal() {
+  document.getElementById('modalNovoPOP').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function fecharModalFora(e) { if(e.target.id === 'modalNovoPOP') fecharModal(); }
+
+function renderStep() {
+  for(let i = 1; i <= totalSteps; i++) {
+    document.getElementById('step'+i).classList.toggle('active', i === stepAtual);
+    const ps = document.getElementById('ps'+i);
+    ps.className = 'progress-step' + (i < stepAtual ? ' done' : i === stepAtual ? ' active' : '');
+  }
+  document.getElementById('btnAnterior').style.display = stepAtual > 1 ? 'inline-flex' : 'none';
+  document.getElementById('btnProximo').style.display = stepAtual < totalSteps ? 'inline-flex' : 'none';
+  document.getElementById('btnSalvarPOP').style.display = stepAtual === totalSteps ? 'inline-flex' : 'none';
+}
+
+function mudarStep(dir) {
+  if(dir > 0 && stepAtual === 1) {
+    if(!document.getElementById('n_title').value.trim()) { alert('Preencha ao menos o Título do POP.'); return; }
+  }
+  stepAtual = Math.max(1, Math.min(totalSteps, stepAtual + dir));
+  renderStep();
+}
+
+function toggleApiPanel() {
+  const p = document.getElementById('apiPanel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+}
+
+function focarTagInput(id) { document.getElementById(id).focus(); }
+
+function addTag(e, campo) {
+  if(e.key !== 'Enter') return;
+  e.preventDefault();
+  const inp = document.getElementById('inp_' + campo);
+  const val = inp.value.trim();
+  if(!val) return;
+  tagData[campo].push(val);
+  inp.value = '';
+  renderTags(campo);
+}
+
+function removeTag(campo, idx) {
+  tagData[campo].splice(idx, 1);
+  renderTags(campo);
+}
+
+function renderTags(campo) {
+  const container = document.getElementById('tags_' + campo);
+  if(!container) return;
+  const ph  = document.getElementById('ph_' + campo);
+  const inp = document.getElementById('inp_' + campo);
+  Array.from(container.children).forEach(c => { if(c !== ph && c !== inp) c.remove(); });
+  ph.style.display = tagData[campo].length > 0 ? 'none' : '';
+  tagData[campo].forEach((t, i) => {
+    const tag = document.createElement('span');
+    tag.className = 'tag-item';
+    tag.innerHTML = t + '<button onclick="removeTag(\'' + campo + '\',' + i + ')">x</button>';
+    container.insertBefore(tag, inp);
+  });
+}
+
+function addFmeaItem() {
+  const idx = fmeaItens.length;
+  fmeaItens.push({ etapa:'', falha:'', efeito:'', causa:'', acao:'', g:7, o:5, d:4 });
+  const div = document.createElement('div');
+  div.id = 'fmea_item_' + idx;
+  div.style.cssText = 'background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;';
+  div.innerHTML =
+    '<div style="display:flex;justify-content:space-between;margin-bottom:8px">' +
+      '<span style="font-size:0.75rem;font-weight:700;color:var(--accent2)">Modo de falha ' + (idx+1) + '</span>' +
+      '<button onclick="removeFmeaItem(' + idx + ')" style="background:none;border:none;cursor:pointer;color:var(--ink3)">x</button>' +
+    '</div>' +
+    '<div class="row2" style="margin-bottom:6px">' +
+      '<div><label>Etapa</label><input type="text" oninput="fmeaItens[' + idx + '].etapa=this.value" placeholder="Etapa" style="font-size:0.78rem"></div>' +
+      '<div><label>Modo de falha</label><input type="text" oninput="fmeaItens[' + idx + '].falha=this.value" placeholder="O que pode falhar?" style="font-size:0.78rem"></div>' +
+    '</div>' +
+    '<div class="row2" style="margin-bottom:6px">' +
+      '<div><label>Efeito</label><input type="text" oninput="fmeaItens[' + idx + '].efeito=this.value" placeholder="Consequência" style="font-size:0.78rem"></div>' +
+      '<div><label>Causa raiz</label><input type="text" oninput="fmeaItens[' + idx + '].causa=this.value" placeholder="Por que ocorre?" style="font-size:0.78rem"></div>' +
+    '</div>' +
+    '<div style="margin-bottom:6px"><label>Acao preventiva</label><input type="text" oninput="fmeaItens[' + idx + '].acao=this.value" placeholder="Como prevenir?" style="font-size:0.78rem"></div>' +
+    '<div style="display:flex;gap:10px">' +
+      '<div style="flex:1"><label>G</label><input type="number" min="1" max="10" value="7" oninput="fmeaItens[' + idx + '].g=+this.value" style="font-size:0.78rem"></div>' +
+      '<div style="flex:1"><label>O</label><input type="number" min="1" max="10" value="5" oninput="fmeaItens[' + idx + '].o=+this.value" style="font-size:0.78rem"></div>' +
+      '<div style="flex:1"><label>D</label><input type="number" min="1" max="10" value="4" oninput="fmeaItens[' + idx + '].d=+this.value" style="font-size:0.78rem"></div>' +
+    '</div>';
+  document.getElementById('fmeaItens').appendChild(div);
+}
+
+function removeFmeaItem(idx) {
+  fmeaItens.splice(idx, 1);
+  const el = document.getElementById('fmea_item_' + idx);
+  if(el) el.remove();
+}
+
+function salvarNovoPOP() {
+  const title = document.getElementById('n_title').value.trim();
+  if(!title) { alert('O titulo e obrigatorio.'); mudarStep(-3); return; }
+  const code  = document.getElementById('n_code').value.trim()  || 'POP-' + Date.now();
+  const rev   = document.getElementById('n_rev').value.trim()   || 'Rev. 01';
+  const setor = document.getElementById('n_setor').value.trim() || 'Nao informado';
+  const resp  = document.getElementById('n_resp').value.trim()  || 'Nao informado';
+  const obj   = document.getElementById('n_obj').value.trim()   || '';
+  const norma = document.getElementById('n_norma').value.trim() || '';
+  const emoji = document.getElementById('n_emoji').value.trim() || '📋';
+  const freq  = document.getElementById('n_freq').value || 'anual';
+  const meta  = { code, rev, title, setor, resp, obj, norma, freq, desc: tagData.passos.join(' · ') };
+  const fluxoEtapas = tagData.fluxo.length > 0 ? tagData.fluxo : ['Executar o procedimento'];
+  const fluxo = [
+    { tipo:'inicio', label:'INICIO', sub: setor },
+    ...fluxoEtapas.map(e => ({ tipo:'processo', label:e, sub:'' })),
+    { tipo:'fim', label:'FIM', sub:'Registro em prontuario' }
+  ];
+  const docData = {
+    it:{
+      objetivo: obj || 'Padronizar ' + title + ' no setor de ' + setor + '.',
+      aplicabilidade: 'Aplica-se a todos os pacientes e profissionais do setor de ' + setor + '.',
+      materiais: tagData.materiais.length > 0 ? tagData.materiais : ['Materiais conforme protocolo institucional'],
+      passos:    tagData.passos.length > 0    ? tagData.passos    : ['Executar conforme descricao do POP'],
+      criticos:  tagData.criticos.length > 0  ? tagData.criticos  : ['Seguir protocolo institucional'],
+      normas: norma || 'Normas institucionais vigentes'
+    },
+    ip:{
+      entradas:    tagData.entradas.length > 0    ? tagData.entradas    : ['Demanda do setor'],
+      atividades:  tagData.atividades.length > 0  ? tagData.atividades  : fluxoEtapas,
+      saidas:      tagData.saidas.length > 0      ? tagData.saidas      : ['Processo executado e registrado'],
+      indicadores: tagData.indicadores.length > 0 ? tagData.indicadores : ['Conformidade com protocolo (meta: 100%)'],
+      responsabilidades: [resp + ': execucao e registro', 'Gestao: insumos e estrutura'],
+      registros: ['Registro em prontuario com data e assinatura', 'Relatorio mensal de conformidade']
+    },
+    fluxo,
+    fmea: fmeaItens.length > 0 ? fmeaItens : [
+      { etapa:'Execucao', falha:'Nao seguir o protocolo', efeito:'Risco ao paciente', causa:'Falta de treinamento', acao:'Capacitacao periodica', g:7, o:5, d:4 }
+    ]
+  };
+  const chave = 'custom_' + Date.now();
+  POPS[chave] = { meta, it: docData.it, ip: docData.ip, fluxo: docData.fluxo, fmea: docData.fmea };
+  const bar = document.querySelector('.examples-bar');
+  const btn = document.createElement('button');
+  btn.className = 'ex-btn';
+  btn.setAttribute('data-key', chave);
+  btn.innerHTML = emoji + ' ' + title + '<span class="xbtn" data-del="' + chave + '"> ✕</span>';
+  btn.onclick = function(e) { if(!e.target.classList.contains('xbtn')) loadExample(chave); };
+  bar.appendChild(btn);
+  generatedDocs = docData;
+  currentMeta = { code, rev, title, setor, resp };
+  renderIT(docData.it, currentMeta);
+  renderIP(docData.ip, currentMeta);
+  renderFluxo(docData.fluxo, currentMeta);
+  renderFMEA(docData.fmea, currentMeta);
+  revealToolbar(); switchTab('it');
+  document.getElementById('popCode').value  = code;
+  document.getElementById('popRev').value   = rev;
+  document.getElementById('popTitle').value = title;
+  document.getElementById('popSetor').value = setor;
+  document.getElementById('popResp').value  = resp;
+  document.getElementById('popObj').value   = obj;
+  document.getElementById('popNorma').value = norma;
+  fecharModal();
+  alert('POP "' + title + '" criado! Clique em Salvar na biblioteca para manter no dispositivo.');
+}
+
 </script>
+
+<!-- MODAL NOVO POP -->
+<div class="modal-overlay" id="modalNovoPOP" style="display:none" onclick="fecharModalFora(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>➕ Criar Novo POP</h2>
+      <button class="modal-close" onclick="fecharModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-step active" id="ps1"></div>
+        <div class="progress-step" id="ps2"></div>
+        <div class="progress-step" id="ps3"></div>
+        <div class="progress-step" id="ps4"></div>
+      </div>
+
+      <!-- PASSO 1: IDENTIFICAÇÃO -->
+      <div class="step-panel active" id="step1">
+        <div class="modal-step-title">📋 Passo 1 de 4 — Identificação do POP</div>
+        <div class="row2">
+          <div class="field"><label>Código do POP</label><input type="text" id="n_code" placeholder="POP-NUT-010"><div class="hint">Ex: POP-NUT-010, POP-CME-003</div></div>
+          <div class="field"><label>Revisão</label><input type="text" id="n_rev" placeholder="Rev. 01"></div>
+        </div>
+        <div class="field"><label>Título do Procedimento</label><input type="text" id="n_title" placeholder="Ex: Avaliação de Risco de Disfagia"></div>
+        <div class="row2">
+          <div class="field"><label>Setor / Unidade</label><input type="text" id="n_setor" placeholder="Ex: Nutrição Clínica, UTI"></div>
+          <div class="field"><label>Responsável Técnico</label><input type="text" id="n_resp" placeholder="Ex: Nutricionista CRN-XX"></div>
+        </div>
+        <div class="field"><label>Objetivo do Procedimento</label><textarea id="n_obj" rows="2" placeholder="Descreva o objetivo principal deste POP..."></textarea></div>
+        <div class="field"><label>Normas / Legislação aplicável</label><input type="text" id="n_norma" placeholder="CFN Res. 600/2018, RDC ANVISA..."></div>
+      </div>
+
+      <!-- PASSO 2: DESCRIÇÃO -->
+      <div class="step-panel" id="step2">
+        <div class="modal-step-title">📝 Passo 2 de 4 — Detalhes do Processo</div>
+        <div class="field">
+          <label>Materiais e EPIs necessários</label>
+          <div class="hint" style="margin-bottom:6px">Digite cada item e pressione Enter para adicionar ↵</div>
+          <div class="tags-input" id="tags_materiais" onclick="focarTagInput('inp_materiais')">
+            <span class="tag-placeholder" id="ph_materiais">Ex: Balança digital, fita métrica...</span>
+            <input type="text" id="inp_materiais" style="border:none;background:transparent;outline:none;font-size:0.82rem;min-width:140px;padding:2px 0" onkeydown="addTag(event,'materiais')">
+          </div>
+        </div>
+        <div class="field">
+          <label>Passos do procedimento (passo a passo)</label>
+          <div class="hint" style="margin-bottom:6px">Digite cada passo e pressione Enter ↵</div>
+          <div class="tags-input" id="tags_passos" onclick="focarTagInput('inp_passos')" style="min-height:70px">
+            <span class="tag-placeholder" id="ph_passos">Ex: Higienizar as mãos antes de iniciar...</span>
+            <input type="text" id="inp_passos" style="border:none;background:transparent;outline:none;font-size:0.82rem;min-width:200px;padding:2px 0" onkeydown="addTag(event,'passos')">
+          </div>
+        </div>
+        <div class="field">
+          <label>Pontos críticos de controle ⚠️</label>
+          <div class="hint" style="margin-bottom:6px">Situações de risco ou atenção especial — pressione Enter ↵</div>
+          <div class="tags-input" id="tags_criticos" onclick="focarTagInput('inp_criticos')">
+            <span class="tag-placeholder" id="ph_criticos">Ex: Confirmar identificação do paciente...</span>
+            <input type="text" id="inp_criticos" style="border:none;background:transparent;outline:none;font-size:0.82rem;min-width:180px;padding:2px 0" onkeydown="addTag(event,'criticos')">
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 3: PROCESSO -->
+      <div class="step-panel" id="step3">
+        <div class="modal-step-title">⚙️ Passo 3 de 4 — Instrução de Processo (IP)</div>
+        <div class="field">
+          <label>Entradas do processo</label>
+          <div class="hint" style="margin-bottom:6px">O que inicia o processo? Pressione Enter ↵</div>
+          <div class="tags-input" id="tags_entradas" onclick="focarTagInput('inp_entradas')">
+            <span class="tag-placeholder" id="ph_entradas">Ex: Paciente admitido, prontuário eletrônico...</span>
+            <input type="text" id="inp_entradas" style="border:none;background:transparent;outline:none;font-size:0.82rem;min-width:160px;padding:2px 0" onkeydown="addTag(event,'entradas')">
+          </div>
+        </div>
+        <div class="field">
+          <label>Atividades principais</label>
+          <div class="hint" style="margin-bottom:6px">Etapas macro do processo — pressione Enter ↵</div>
+          <div class="tags-input" id="tags_atividades" onclick="focarTagInput('inp_atividades')">
+            <span class="tag-placeholder" id="ph_atividades">Ex: Triagem · Avaliação · Prescrição...</span>
+            <input type="text" id="inp_atividades" style="border:none;background:transparent;outline:none;font-size:0.82rem;min-width:160px;padding:2px 0" onkeydown="addTag(event,'atividades')">
+          </div>
+        </div>
+        <div class="field">
+          <label>Saídas / Resultados esperados</label>
+          <div class="hint" style="margin-bottom:6px">O que o processo entrega? Pressione Enter ↵</div>
+          <div class="tags-input" id="tags_saidas" onclick="focarTagInput('inp_saidas')">
+            <span class="tag-placeholder" id="ph_saidas">Ex: Diagnóstico nutricional registrado...</span>
+            <input type="text" id="inp_saidas" style="border:none;background:transparent;outline:none;font-size:0.82rem;min-width:160px;padding:2px 0" onkeydown="addTag(event,'saidas')">
+          </div>
+        </div>
+        <div class="field">
+          <label>Indicadores de qualidade 📊</label>
+          <div class="hint" style="margin-bottom:6px">Como medir se o processo está funcionando bem? Pressione Enter ↵</div>
+          <div class="tags-input" id="tags_indicadores" onclick="focarTagInput('inp_indicadores')">
+            <span class="tag-placeholder" id="ph_indicadores">Ex: Taxa de triagem ≥ 95% nas 24h...</span>
+            <input type="text" id="inp_indicadores" style="border:none;background:transparent;outline:none;font-size:0.82rem;min-width:160px;padding:2px 0" onkeydown="addTag(event,'indicadores')">
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 4: FLUXO E FMEA SIMPLIFICADO -->
+      <div class="step-panel" id="step4">
+        <div class="modal-step-title">🔄 Passo 4 de 4 — Fluxo e Riscos (FMEA)</div>
+        <div class="field">
+          <label>Etapas do Fluxograma</label>
+          <div class="hint" style="margin-bottom:6px">Liste as etapas em ordem — a primeira e última serão INÍCIO e FIM automaticamente. Pressione Enter ↵</div>
+          <div class="tags-input" id="tags_fluxo" onclick="focarTagInput('inp_fluxo')" style="min-height:70px">
+            <span class="tag-placeholder" id="ph_fluxo">Ex: Identificar paciente, Aplicar triagem...</span>
+            <input type="text" id="inp_fluxo" style="border:none;background:transparent;outline:none;font-size:0.82rem;min-width:160px;padding:2px 0" onkeydown="addTag(event,'fluxo')">
+          </div>
+        </div>
+        <div style="background:var(--gold-light);border:1px solid var(--gold);border-radius:8px;padding:12px 14px;margin-bottom:14px">
+          <div style="font-size:0.76rem;font-weight:700;color:#5c3d00;margin-bottom:8px">⚠️ Adicionar riscos ao FMEA (opcional)</div>
+          <div id="fmeaItens"></div>
+          <button onclick="addFmeaItem()" style="background:none;border:1px dashed var(--gold);border-radius:7px;padding:6px 14px;font-size:0.76rem;color:#7a5800;cursor:pointer;width:100%;margin-top:6px">+ Adicionar modo de falha</button>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Emoji do botão</label><input type="text" id="n_emoji" placeholder="🥗" maxlength="4"><div class="hint">Escolha um emoji para o botão na tela inicial</div></div>
+          <div class="field"><label>Revisão periódica</label><select id="n_freq"><option value="anual">Anual</option><option value="semestral">Semestral</option><option value="bienal">Bienal</option></select></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-sm" id="btnAnterior" onclick="mudarStep(-1)" style="display:none">← Anterior</button>
+      <button class="btn btn-primary" id="btnProximo" onclick="mudarStep(1)" style="width:auto;padding:9px 24px">Próximo →</button>
+      <button class="btn btn-primary" id="btnSalvarPOP" onclick="salvarNovoPOP()" style="display:none;width:auto;padding:9px 24px;background:var(--accent)">✅ Criar POP</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
