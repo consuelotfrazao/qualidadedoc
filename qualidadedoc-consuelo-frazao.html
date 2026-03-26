@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QualidadeDoc — Nutrição Hospitalar | Consuelo Frazão</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f4f1eb;--surface:#fffdf8;--surface2:#f0ede4;--border:#d8d3c8;
+    --ink:#1a1714;--ink2:#4a4540;--ink3:#8a8278;
+    --accent:#2d6a4f;--accent2:#1b4332;--accent-light:#d8f3dc;
+    --warn:#b5451b;--warn-light:#fce8df;
+    --gold:#c9a84c;--gold-light:#fef6e0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;min-height:100vh;}
+
+  header{background:var(--accent2);padding:14px 36px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--gold);}
+  .logo{font-family:'DM Serif Display',serif;font-size:1.5rem;color:#fff;}.logo span{color:var(--gold);}
+  .badge{background:var(--gold);color:var(--accent2);font-size:0.66rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:20px;}
+
+  .author-bar{background:var(--accent2);border-top:1px solid rgba(255,255,255,0.1);padding:8px 36px;display:flex;align-items:center;gap:10px;}
+  .author-bar span{color:rgba(255,255,255,0.6);font-size:0.76rem;}
+  .author-bar a{color:var(--gold);font-size:0.78rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:5px;}
+  .author-bar a:hover{text-decoration:underline;}
+  .author-bar .li-icon{width:16px;height:16px;background:#0a66c2;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-size:0.6rem;color:#fff;font-weight:700;flex-shrink:0;}
+
+  .container{max-width:1200px;margin:0 auto;padding:26px 22px;}
+
+  .hero{text-align:center;margin-bottom:24px;}
+  .hero h1{font-family:'DM Serif Display',serif;font-size:1.9rem;color:var(--accent2);margin-bottom:7px;}
+  .hero p{color:var(--ink2);font-size:0.9rem;max-width:540px;margin:0 auto;line-height:1.6;}
+
+  /* EXAMPLE BUTTONS */
+  .examples-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;padding:14px 18px;background:var(--gold-light);border:1px solid var(--gold);border-radius:12px;}
+  .examples-bar .label{font-size:0.75rem;font-weight:700;color:#5c3d00;width:100%;margin-bottom:2px;letter-spacing:0.3px;}
+  .ex-btn{padding:7px 14px;border-radius:20px;border:1px solid var(--gold);background:var(--surface);color:#5c3d00;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+  .ex-btn:hover{background:var(--gold);color:var(--accent2);}
+  .ex-btn.active{background:var(--accent2);color:#fff;border-color:var(--accent2);}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+  @media(max-width:800px){.grid{grid-template-columns:1fr;}}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:13px;overflow:hidden;}
+  .card-header{padding:12px 16px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--border);background:var(--surface2);}
+  .card-header .icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;}
+  .icon-green{background:var(--accent-light);}.icon-gold{background:var(--gold-light);}
+  .card-header h3{font-size:0.88rem;font-weight:600;}.card-header p{font-size:0.72rem;color:var(--ink3);}
+  .card-body{padding:14px 16px;}
+
+  label{display:block;font-size:0.76rem;font-weight:600;color:var(--ink2);margin-bottom:4px;}
+  input[type="text"],select,textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'DM Sans',sans-serif;font-size:0.84rem;color:var(--ink);outline:none;transition:border-color 0.2s;resize:vertical;}
+  input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,106,79,0.1);}
+  textarea{min-height:100px;}
+  .field{margin-bottom:11px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;}
+  .btn-primary{background:var(--accent2);color:#fff;width:100%;justify-content:center;padding:11px;font-size:0.9rem;margin-top:4px;}
+  .btn-primary:hover{background:var(--accent);}
+  .btn-sm{padding:5px 12px;font-size:0.74rem;background:var(--surface2);border:1px solid var(--border);color:var(--ink2);}
+  .btn-sm:hover{background:var(--border);}
+  .btn-gold{background:var(--gold);color:var(--accent2);}
+
+  .doc-tabs{display:flex;gap:3px;padding:9px 13px 0;background:var(--surface2);border-bottom:1px solid var(--border);overflow-x:auto;}
+  .doc-tab{padding:6px 12px;font-size:0.75rem;font-weight:600;border:1px solid var(--border);border-bottom:none;border-radius:6px 6px 0 0;background:var(--surface2);color:var(--ink3);cursor:pointer;white-space:nowrap;transition:all 0.15s;}
+  .doc-tab.active{background:var(--surface);color:var(--accent2);}
+  .doc-tab .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;background:var(--border);}
+  .doc-tab.ready .dot{background:var(--accent);}
+
+  .doc-panel{display:none;}.doc-panel.active{display:block;}
+  .doc-content{padding:14px 16px;min-height:300px;font-size:0.83rem;line-height:1.7;color:var(--ink2);}
+  .doc-content[contenteditable="true"]{outline:none;border:2px dashed var(--accent);border-radius:6px;background:#fafff9;}
+
+  .placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:240px;gap:9px;color:var(--ink3);text-align:center;}
+  .placeholder .big-icon{font-size:2.2rem;opacity:0.3;}
+  .placeholder p{font-size:0.8rem;max-width:200px;}
+
+  .doc-section{margin-bottom:14px;}
+  .doc-section h4{font-size:0.73rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--accent2);border-bottom:1px solid var(--accent-light);padding-bottom:4px;margin-bottom:6px;}
+  .doc-section p{font-size:0.83rem;line-height:1.7;}
+  .doc-section ul{padding-left:15px;font-size:0.83rem;line-height:1.85;}
+
+  .doc-toolbar{padding:8px 13px;border-top:1px solid var(--border);display:flex;gap:6px;align-items:center;flex-wrap:wrap;background:var(--surface2);}
+  .edit-badge{font-size:0.68rem;font-weight:600;padding:3px 8px;border-radius:20px;background:var(--accent-light);color:var(--accent2);margin-left:auto;}
+
+  .pop-list{margin-top:9px;display:flex;flex-direction:column;gap:6px;}
+  .pop-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.15s;}
+  .pop-item:hover{border-color:var(--accent);background:var(--accent-light);}
+  .pop-name{font-size:0.82rem;font-weight:600;}.pop-meta{font-size:0.7rem;color:var(--ink3);margin-top:1px;}
+  .pop-status{font-size:0.66rem;font-weight:700;letter-spacing:0.5px;padding:2px 7px;border-radius:20px;}
+  .status-complete{background:var(--accent-light);color:var(--accent2);}
+  .status-new{background:var(--surface2);color:var(--ink3);}
+
+  .doc-header-block{background:var(--accent2);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;}
+  .doc-type{font-family:'DM Serif Display',serif;font-size:0.92rem;}
+  .doc-meta-small{font-size:0.68rem;opacity:0.7;}
+  .doc-id{background:var(--gold);color:var(--accent2);font-size:0.68rem;font-weight:700;padding:2px 7px;border-radius:4px;}
+
+  .fmea-wrap{overflow-x:auto;padding:0 13px 13px;}
+  .fmea-table{width:100%;border-collapse:collapse;font-size:0.76rem;}
+  .fmea-table th{background:var(--accent2);color:#fff;padding:6px 8px;text-align:left;font-weight:600;font-size:0.68rem;letter-spacing:0.3px;}
+  .fmea-table td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .fmea-table tr:nth-child(even) td{background:var(--surface2);}
+  .rpn{font-weight:700;}.rpn-high{color:var(--warn);}.rpn-med{color:#c97a00;}.rpn-low{color:var(--accent);}
+
+  .fluxo-box{display:flex;flex-direction:column;align-items:center;padding:12px 0;}
+  .fluxo-step{background:var(--accent-light);border:2px solid var(--accent);border-radius:7px;padding:8px 18px;text-align:center;font-weight:600;color:var(--accent2);width:80%;max-width:320px;font-size:0.8rem;}
+  .fluxo-step.diamond{background:var(--gold-light);border-color:var(--gold);color:#5c3d00;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);border-radius:0;width:180px;min-height:65px;display:flex;align-items:center;justify-content:center;padding:12px;}
+  .fluxo-step.terminator{border-radius:50px;background:var(--accent2);color:#fff;border-color:var(--accent2);}
+  .fluxo-arrow{font-size:1.1rem;color:var(--accent);line-height:1.5;}
+  .fluxo-sub{font-size:0.68rem;color:var(--ink3);margin-top:2px;font-weight:400;}
+
+  .alert-info{background:#e0f0ff;color:#1a4a7a;border:1px solid #b0d4f5;padding:8px 12px;border-radius:8px;font-size:0.78rem;margin-top:10px;display:flex;gap:7px;}
+  .char-count{font-size:0.68rem;color:var(--ink3);text-align:right;margin-top:2px;}
+
+  footer{text-align:center;padding:24px;color:var(--ink3);font-size:0.76rem;border-top:1px solid var(--border);margin-top:32px;}
+  footer a{color:var(--accent);text-decoration:none;font-weight:600;}
+  footer a:hover{text-decoration:underline;}
+
+  .how-to{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:22px;display:flex;gap:24px;flex-wrap:wrap;}
+  .how-step{display:flex;align-items:flex-start;gap:10px;flex:1;min-width:160px;}
+  .how-num{width:26px;height:26px;border-radius:50%;background:var(--accent2);color:#fff;font-size:0.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .how-text strong{display:block;font-size:0.82rem;color:var(--ink);margin-bottom:2px;}
+  .how-text span{font-size:0.76rem;color:var(--ink3);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Qualidade<span>Doc</span></div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span style="color:#a8d8b8;font-size:0.76rem">Nutrição Hospitalar · Ferramenta Gratuita</span>
+    <span class="badge">Open Source</span>
+  </div>
+</header>
+
+<div class="author-bar">
+  <span>Desenvolvido por</span>
+  <a href="https://www.linkedin.com/in/consuelofrazaonutricionista" target="_blank">
+    <span class="li-icon">in</span>
+    Consuelo Frazão · Nutricionista
+  </a>
+  <span style="margin-left:auto;font-size:0.72rem;color:rgba(255,255,255,0.4)">Compartilhe e ajude outros profissionais ✨</span>
+</div>
+
+<div class="container">
+  <div class="hero">
+    <h1>Automação de Documentos de Qualidade</h1>
+    <p>Selecione um POP de exemplo e veja instantaneamente a IT, IP, Fluxograma e FMEA gerados — prontos para editar e usar no seu serviço.</p>
+  </div>
+
+  <!-- COMO USAR -->
+  <div class="how-to">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-text"><strong>Escolha um exemplo</strong><span>Clique em um dos POPs prontos abaixo</span></div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-text"><strong>Veja os documentos</strong><span>IT, IP, Fluxograma e FMEA gerados</span></div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-text"><strong>Edite e adapte</strong><span>Clique em ✏️ Editar e personalize</span></div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">4</div>
+      <div class="how-text"><strong>Salve ou imprima</strong><span>Copie, exporte TXT ou imprima</span></div>
+    </div>
+  </div>
+
+  <!-- EXAMPLES BAR -->
+  <div class="examples-bar">
+    <div class="label">📂 POPs disponíveis — clique para carregar:</div>
+    <button class="ex-btn" onclick="loadExample('avaliacao')">🥗 Avaliação Nutricional na Admissão</button>
+    <button class="ex-btn" onclick="loadExample('higienizacao')">🙌 Higienização das Mãos</button>
+    <button class="ex-btn" onclick="loadExample('suplemento_oral')">💊 Prescrição e Acompanhamento de Suplementação Oral</button>
+    <button class="ex-btn" onclick="loadExample('visitaleito')">🛏️ Visita Beira Leito do Nutricionista</button>
+    <button class="ex-btn" onclick="loadExample('suplementacao')">🧃 Indicação de Suplementação Nutricional</button>
+    <button class="ex-btn" onclick="loadExample('aceitacao')">📊 Controle de Aceitação de Dieta</button>
+    <button class="ex-btn" onclick="loadExample('enteral')">🔬 Preparo de Dieta Enteral</button>
+  </div>
+
+  <div class="grid">
+    <!-- ESQUERDA -->
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-header">
+          <div class="icon icon-green">📋</div>
+          <div><h3>Procedimento Operacional Padrão (POP)</h3><p>Dados do processo selecionado</p></div>
+        </div>
+        <div class="card-body">
+          <div class="row2">
+            <div class="field"><label>Código</label><input type="text" id="popCode" placeholder="POP-NUT-001" /></div>
+            <div class="field"><label>Revisão</label><input type="text" id="popRev" placeholder="Rev. 01" /></div>
+          </div>
+          <div class="field"><label>Título</label><input type="text" id="popTitle" /></div>
+          <div class="row2">
+            <div class="field"><label>Setor</label><input type="text" id="popSetor" /></div>
+            <div class="field"><label>Responsável</label><input type="text" id="popResp" /></div>
+          </div>
+          <div class="field"><label>Objetivo</label><textarea id="popObj" rows="2"></textarea></div>
+          <div class="field">
+            <label>Descrição do Processo</label>
+            <textarea id="popDesc" rows="6"></textarea>
+            <div class="char-count" id="charCount">0 caracteres</div>
+          </div>
+          <div class="row2">
+            <div class="field"><label>Normas / Legislação</label><input type="text" id="popNorma" /></div>
+            <div class="field"><label>Revisão periódica</label>
+              <select id="popFreq">
+                <option value="anual">Anual</option>
+                <option value="semestral">Semestral</option>
+                <option value="bienal">Bienal</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <button class="btn btn-sm" onclick="savePOP()" style="flex:1">💾 Salvar na biblioteca</button>
+            <button class="btn btn-sm" onclick="clearForm()">🗑️ Limpar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="icon icon-gold">📚</div>
+          <div><h3>Biblioteca de POPs</h3><p>POPs salvos neste dispositivo</p></div>
+        </div>
+        <div class="card-body">
+          <div class="pop-list" id="popList">
+            <div style="text-align:center;padding:14px;color:var(--ink3);font-size:0.78rem">Nenhum POP salvo ainda.<br>Carregue um exemplo e salve!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIREITA -->
+    <div>
+      <div class="card">
+        <div class="doc-tabs">
+          <div class="doc-tab active" data-tab="it"    onclick="switchTab('it')"><span class="dot"></span>IT</div>
+          <div class="doc-tab"        data-tab="ip"    onclick="switchTab('ip')"><span class="dot"></span>IP</div>
+          <div class="doc-tab"        data-tab="fluxo" onclick="switchTab('fluxo')"><span class="dot"></span>Fluxograma</div>
+          <div class="doc-tab"        data-tab="fmea"  onclick="switchTab('fmea')"><span class="dot"></span>FMEA</div>
+        </div>
+
+        <div class="doc-panel active" id="panel-it">
+          <div class="placeholder" id="placeholder-it"><div class="big-icon">📄</div><p>Selecione um POP acima para ver a IT.</p></div>
+          <div id="content-it" style="display:none"><div class="doc-content" id="text-it" contenteditable="false"></div></div>
+        </div>
+        <div class="doc-panel" id="panel-ip">
+          <div class="placeholder" id="placeholder-ip"><div class="big-icon">⚙️</div><p>Selecione um POP acima para ver a IP.</p></div>
+          <div id="content-ip" style="display:none"><div class="doc-content" id="text-ip" contenteditable="false"></div></div>
+        </div>
+        <div class="doc-panel" id="panel-fluxo">
+          <div class="placeholder" id="placeholder-fluxo"><div class="big-icon">🔄</div><p>Selecione um POP acima para ver o Fluxograma.</p></div>
+          <div id="content-fluxo" style="display:none"><div class="doc-content" id="text-fluxo"></div></div>
+        </div>
+        <div class="doc-panel" id="panel-fmea">
+          <div class="placeholder" id="placeholder-fmea"><div class="big-icon">⚠️</div><p>Selecione um POP acima para ver o FMEA.</p></div>
+          <div id="content-fmea" style="display:none"><div class="doc-content" id="text-fmea"></div></div>
+        </div>
+
+        <div class="doc-toolbar">
+          <button class="btn btn-sm" id="editBtn"   onclick="toggleEdit()"  style="display:none">✏️ Editar</button>
+          <button class="btn btn-sm btn-gold" id="copyBtn" onclick="copyDoc()" style="display:none">📋 Copiar</button>
+          <button class="btn btn-sm" id="printBtn"  onclick="printDoc()"    style="display:none">🖨️ Imprimir</button>
+          <button class="btn btn-sm" id="exportBtn" onclick="exportDoc()"   style="display:none">⬇️ Exportar TXT</button>
+          <span class="edit-badge" id="editBadge" style="display:none">✓ Modo edição</span>
+        </div>
+      </div>
+
+      <div class="alert-info" style="margin-top:12px">
+        💡 Todos os documentos são <strong>editáveis</strong>. Adapte ao seu serviço, salve na biblioteca e exporte quando precisar.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Desenvolvido por <a href="https://www.linkedin.com/in/consuelofrazaonutricionista" target="_blank">Consuelo Frazão</a> · Nutricionista Hospitalar &nbsp;|&nbsp;
+  Ferramenta gratuita e open source &nbsp;|&nbsp;
+  <a href="https://www.linkedin.com/in/consuelofrazaonutricionista" target="_blank">Conecte-se no LinkedIn</a>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// BASE DE DADOS — 7 POPs COMPLETOS
+// ══════════════════════════════════════════════════════════════════
+const POPS = {
+
+avaliacao: {
+  meta:{ code:'POP-NUT-001', rev:'Rev. 02', title:'Triagem e Avaliação Nutricional na Admissão do Paciente', setor:'Nutrição Clínica / Internação', resp:'Nutricionista Responsável', norma:'CFN Res. 600/2018 · RDC ANVISA 63/2000 · NRS-2002 · ILSI Brasil', freq:'anual',
+    obj:'Identificar precocemente pacientes em risco nutricional na admissão hospitalar, garantindo conduta dietoterápica individualizada e segura.',
+    desc:'Triagem NRS-2002 nas primeiras 24h · Anthropometria completa · Avaliação bioquímica · Cálculo de necessidades calórico-proteicas · Prescrição dietética · Registro em prontuário · Monitoramento semanal' },
+  it:{ objetivo:'Padronizar o processo de triagem e avaliação nutricional de pacientes admitidos, garantindo identificação precoce do risco nutricional e implementação de condutas dietoterápicas seguras e individualizadas, em conformidade com CFN e ANVISA.',
+    aplicabilidade:'Aplica-se a todos os pacientes adultos, pediátricos e idosos admitidos nas unidades de internação clínica, cirúrgica, UTI e pronto-socorro, executada pelo nutricionista nas primeiras 24h da admissão.',
+    materiais:['Balança digital calibrada (resolução 0,1 kg)','Estadiômetro ou fita métrica inelástica','Adipômetro científico (Harpenden ou equivalente)','Dinamômetro de preensão manual','Formulários NRS-2002 / STAMP / MAN','Tablet ou computador com acesso ao prontuário eletrônico (TASY/MV2000)','Luvas de procedimento e álcool gel 70%'],
+    passos:['Confirmar identificação do paciente com dois identificadores (nome completo + data de nascimento ou nº do prontuário).','Aplicar triagem NRS-2002 (adultos) ou STAMP (pediátrico) dentro das primeiras 24h da admissão.','Coletar anthropometria: peso, estatura, IMC, circunferência do braço (CB) e panturrilha (CP).','Investigar histórico de perda de peso involuntária nos últimos 1, 3 e 6 meses e redução de ingestão alimentar.','Classificar risco: sem risco (0-1), moderado (2) ou alto (≥3). Risco moderado/alto: prosseguir para avaliação completa.','Aplicar ASG ou MAN (idosos); analisar exames bioquímicos (albumina, pré-albumina, PCR, hemograma, glicemia).','Calcular necessidades energéticas e proteicas com Harris-Benedict + fator de atividade e estresse clínico.','Prescrever dieta individualizada (tipo, consistência, via, volume) e registrar no prontuário com CID E40–E46 em até 24h.','Orientar paciente e familiar sobre a conduta dietética; solicitar suplementação oral se indicado.','Programar reavaliação semanal ou conforme mudança do quadro clínico.'],
+    criticos:['OBRIGATÓRIO: confirmar dois identificadores antes de iniciar — risco de troca de conduta.','Atualizar prontuário em até 24h da admissão — atrasos comprometem a segurança e rastreabilidade.','Comunicar imediatamente ao médico e EMTN em caso de desnutrição grave (IMC < 16 ou perda > 10%/mês).','Verificar alergias e intolerâncias ANTES de qualquer prescrição dietética ou suplementação.'],
+    normas:'CFN Resolução 600/2018 · RDC ANVISA 63/2000 · Protocolo EMTN institucional · NRS-2002 (Kondrup et al., 2003) · CID-10 E40–E46' },
+  ip:{ entradas:['Paciente recém-admitido com ficha de internação e prescrição médica inicial','Dados clínicos e exames bioquímicos no prontuário eletrônico','Formulários de triagem e equipamentos calibrados'],
+    atividades:['Triagem nutricional nas primeiras 24h com classificação de risco','Avaliação nutricional completa: anthropometria, anamnese e bioquímica','Cálculo de necessidades e prescrição dietoterápica individualizada','Registro no prontuário com CID nutricional e comunicação multidisciplinar','Monitoramento semanal e readequação da conduta'],
+    saidas:['Diagnóstico nutricional registrado no prontuário (CID E40–E46)','Prescrição dietoterápica individualizada (tipo, consistência, via e volume)','Plano de monitoramento com frequência de reavaliação definida','Relatório para EMTN em casos de desnutrição grave'],
+    indicadores:['Taxa de triagem nas primeiras 24h (meta: ≥95%)','% de pacientes de risco com avaliação completa (meta: 100%)','Tempo entre admissão e registro da prescrição (meta: ≤24h)','Taxa de desnutrição hospitalar identificada e tratada (mensal)'],
+    responsabilidades:['Nutricionista: triagem, avaliação, prescrição e registro','Técnico em Nutrição: anthropometria supervisionada e distribuição de dietas','Médico assistente: dados clínicos e validação da dieta','Enfermagem: registro diário de aceitação e comunicação de intercorrências','EMTN: supervisão de casos críticos e revisão de protocolos'],
+    registros:['Formulário NRS-2002/STAMP/MAN no prontuário físico e/ou eletrônico','Evolução nutricional no prontuário (TASY/MV2000) com data, hora e CRN','Ficha diária de aceitação alimentar','Ata de rounds da EMTN (quando aplicável)'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Admissão do paciente'},{tipo:'processo',label:'Confirmar 2 identificadores',sub:'Nome + data de nascimento'},{tipo:'processo',label:'Aplicar NRS-2002 / STAMP',sub:'Primeiras 24h'},{tipo:'decisao',label:'Risco nutricional?',sub:'Escore ≥ 2'},{tipo:'processo',label:'Avaliação Nutricional Completa',sub:'Anthropometria + bioquímica + ASG'},{tipo:'processo',label:'Calcular necessidades',sub:'Harris-Benedict + fator de estresse'},{tipo:'processo',label:'Prescrever dieta individualizada',sub:'Tipo · via · volume'},{tipo:'decisao',label:'Desnutrição grave?',sub:'IMC < 16 ou perda > 10%/mês'},{tipo:'processo',label:'Acionar EMTN + médico',sub:'Comunicação imediata'},{tipo:'processo',label:'Registrar no prontuário',sub:'CID nutricional em até 24h'},{tipo:'processo',label:'Monitoramento semanal',sub:'Reavaliação e ajuste'},{tipo:'fim',label:'FIM',sub:'Alta / transferência'}],
+  fmea:[{etapa:'Identificação',falha:'Não confirmação dos 2 identificadores',efeito:'Troca de conduta entre pacientes',causa:'Pressa na rotina',acao:'Checklist obrigatório pré-avaliação',g:9,o:3,d:4},{etapa:'Triagem NRS-2002',falha:'Não realizada nas 24h',efeito:'Risco nutricional não identificado',causa:'Sobrecarga de trabalho',acao:'Alerta no prontuário eletrônico',g:8,o:5,d:5},{etapa:'Anthropometria',falha:'Equipamento descalibrado',efeito:'Dados imprecisos e prescrição inadequada',causa:'Falta de manutenção',acao:'Calibração semestral obrigatória',g:7,o:4,d:3},{etapa:'Prescrição',falha:'Alergia não verificada',efeito:'Reação alérgica grave',causa:'Anamnese incompleta',acao:'Campo obrigatório de alergias no prontuário',g:10,o:2,d:3},{etapa:'Registro',falha:'Prescrição após 24h ou incompleta',efeito:'Falha na rastreabilidade',causa:'Acúmulo de atendimentos',acao:'Meta monitorada mensalmente',g:6,o:6,d:4}]
+},
+
+higienizacao: {
+  meta:{ code:'POP-INF-001', rev:'Rev. 03', title:'Higienização das Mãos na Assistência à Saúde', setor:'Todos os setores assistenciais', resp:'CCIH / Enfermagem', norma:'OMS 5 Momentos · RDC ANVISA 42/2010 · NR-32 · MS Portaria 2616/1998', freq:'anual',
+    obj:'Prevenir e controlar infecções relacionadas à assistência à saúde (IRAS) por meio da higienização correta e oportuna das mãos de todos os profissionais.',
+    desc:'Higienização simples com água e sabonete · Higienização antisséptica com PVPI ou clorexidina · Fricção antisséptica com álcool gel 70% · 5 Momentos da OMS · Técnica dos 11 passos · Duração mínima de 40-60 segundos' },
+  it:{ objetivo:'Padronizar o procedimento de higienização das mãos entre todos os profissionais de saúde, prevenindo a transmissão de micro-organismos e reduzindo as infecções relacionadas à assistência à saúde (IRAS).',
+    aplicabilidade:'Aplica-se a todos os profissionais, estudantes e visitantes que prestam cuidados diretos ou indiretos ao paciente em qualquer setor da instituição.',
+    materiais:['Sabonete líquido antisséptico (clorexidina 2% ou PVPI 10%)','Solução alcoólica 70% (gel ou líquida) disponível no ponto de cuidado','Papel toalha descartável — NUNCA toalha de tecido','Pias com torneira com acionamento sem contato manual (preferencial)','Lixeira com pedal para descarte do papel toalha','Cartaz dos 5 Momentos da OMS fixado nos postos de trabalho'],
+    passos:['Remover anéis, pulseiras, relógio e adornos antes de iniciar o plantão — ficam abaixo dos punhos.','Identificar o MOMENTO correto conforme OMS: 1) antes de tocar o paciente; 2) antes de procedimento asséptico; 3) após risco de exposição a fluidos; 4) após tocar o paciente; 5) após contato com áreas próximas ao paciente.','ÁLCOOL GEL (mãos visivelmente limpas, 20–30 segundos): aplicar 3–5 mL na palma; esfregar palmas entre si; esfregar dorso de cada mão; entrelaçar dedos; esfregar polegares; friccionar pontas dos dedos; aguardar evaporação completa — NÃO enxaguar.','ÁGUA E SABÃO (mãos visivelmente sujas ou após uso do banheiro, 40–60 segundos): molhar as mãos; aplicar sabonete; friccionar todas as superfícies por no mínimo 15 segundos; enxaguar completamente; secar com papel toalha descartável; fechar a torneira com o próprio papel toalha.','Verificar que toda a superfície das mãos foi atingida: palmas, dorso, espaços interdigitais, polegar, pontas dos dedos e punhos.','Registrar conformidade nas auditorias periódicas realizadas pela CCIH.'],
+    criticos:['NUNCA usar álcool gel em mãos visivelmente sujas ou contaminadas com sangue ou fluidos — usar água e sabão.','Unhas devem ser curtas, limpas e sem esmalte — unhas longas acumulam micro-organismos e comprometem a técnica.','A não adesão à higienização das mãos é a principal causa de IRAS — cada etapa dos 5 Momentos é obrigatória.','Luvas NÃO substituem a higienização das mãos — higienizar antes de calçar e após retirar as luvas.'],
+    normas:'OMS "Minha higiene das mãos salva vidas" (5 Momentos) · RDC ANVISA 42/2010 · NR-32 (Segurança em Serviços de Saúde) · MS Portaria 2616/1998' },
+  ip:{ entradas:['Profissional de saúde prestes a realizar cuidado ao paciente','Identificação do momento de higienização conforme OMS','Insumos disponíveis: álcool gel 70% e/ou água + sabonete + papel toalha'],
+    atividades:['Identificação do momento correto conforme os 5 Momentos da OMS','Escolha do método adequado (álcool gel vs. água e sabão)','Execução da técnica de 11 passos pelo tempo mínimo recomendado','Verificação visual da cobertura completa das mãos','Auditoria periódica de conformidade pela CCIH'],
+    saidas:['Mãos higienizadas adequadamente antes/após cada momento assistencial','Redução da carga microbiana transitória nas mãos do profissional','Registro de conformidade nas auditorias mensais da CCIH','Relatório de taxa de adesão por setor (mensal)'],
+    indicadores:['Taxa de adesão à higienização das mãos por setor (meta: ≥80%)','Taxa de IRAS associadas a falhas de higienização (monitoramento contínuo)','% de dispensadores de álcool gel disponíveis e abastecidos (meta: 100%)','N° de treinamentos realizados e profissionais capacitados (anual)'],
+    responsabilidades:['Todos os profissionais: aderir aos 5 Momentos e à técnica correta','CCIH: auditoria mensal, treinamentos e divulgação dos indicadores','Enfermagem: supervisão da técnica e abastecimento dos dispensadores','Gestão: garantir insumos e estrutura adequada em todos os pontos de cuidado'],
+    registros:['Formulário de auditoria da CCIH (mensal por setor)','Relatório de taxa de adesão à higienização das mãos','Lista de presença dos treinamentos realizados','Registro de consumo de álcool gel e sabonete (controle de estoque mensal)'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Momento assistencial identificado'},{tipo:'decisao',label:'Mãos visivelmente sujas?',sub:'Ou após banheiro?'},{tipo:'processo',label:'Higienização com Água e Sabão',sub:'40–60 segundos · 11 passos'},{tipo:'processo',label:'Fricção com Álcool Gel 70%',sub:'20–30 segundos · 11 passos'},{tipo:'processo',label:'Cobrir TODAS as superfícies',sub:'Palmas · dorso · dedos · polegar · punhos'},{tipo:'decisao',label:'Técnica completa realizada?',sub:'Todas as superfícies atingidas?'},{tipo:'processo',label:'Repetir etapas incompletas',sub:'Não encurtar o procedimento'},{tipo:'processo',label:'Aguardar secagem completa',sub:'Álcool: evaporação · Água: papel toalha'},{tipo:'processo',label:'Realizar o cuidado ao paciente',sub:'Com segurança'},{tipo:'fim',label:'FIM',sub:'Repetir a cada novo momento OMS'}],
+  fmea:[{etapa:'Identificação do momento',falha:'Profissional não identifica o momento correto da OMS',efeito:'Higienização omitida em situação de risco',causa:'Desconhecimento ou não adesão ao protocolo',acao:'Treinamento semestral e cartazes nos postos de trabalho',g:9,o:6,d:4},{etapa:'Escolha do método',falha:'Uso de álcool gel em mãos visivelmente sujas',efeito:'Micro-organismos não eliminados; falsa segurança',causa:'Pressa; desconhecimento da indicação correta',acao:'Sinalização clara nos dispensadores; treinamento',g:8,o:5,d:3},{etapa:'Técnica dos 11 passos',falha:'Tempo insuficiente ou etapas puladas',efeito:'Superfícies das mãos não descontaminadas',causa:'Sobrecarga de trabalho; pressa',acao:'Auditoria por observação direta; feedback imediato',g:7,o:7,d:5},{etapa:'Insumos',falha:'Dispensador vazio ou avariado no ponto de cuidado',efeito:'Impossibilidade de higienizar no momento correto',causa:'Falha no reabastecimento; manutenção inadequada',acao:'Checklist diário de abastecimento; estoque de segurança',g:8,o:4,d:3},{etapa:'Auditoria',falha:'Taxa de adesão não monitorada ou não divulgada',efeito:'Não identificação de setores com baixa conformidade',causa:'Falta de recursos humanos na CCIH',acao:'Auditoria mensal obrigatória com relatório à direção',g:6,o:5,d:6}]
+},
+
+suplemento_oral: {
+  meta:{ code:'POP-NUT-006', rev:'Rev. 01', title:'Prescrição e Acompanhamento de Suplementação Nutricional Oral', setor:'Nutrição Clínica / Ambulatório', resp:'Nutricionista Responsável', norma:'CFN Res. 600/2018 · Diretrizes BRASPEN 2023 · RDC ANVISA 18/2013', freq:'anual',
+    obj:'Padronizar a prescrição, orientação e acompanhamento da suplementação nutricional oral (SNO), monitorando aceitação, volume consumido por dia e sintomas gastrointestinais para garantir efetividade e segurança da terapia.',
+    desc:'Critérios de indicação do SNO · Seleção da fórmula adequada · Prescrição e orientação ao paciente · Monitoramento de aceitação e volume diário · Avaliação de sintomas GI · Ajuste de fórmula, sabor e horário · Critérios de suspensão · Registro em prontuário' },
+  it:{ objetivo:'Padronizar a prescrição e o acompanhamento da suplementação nutricional oral (SNO) pelo nutricionista, garantindo monitoramento sistemático da aceitação, do volume consumido diariamente e dos sintomas gastrointestinais, com ajuste oportuno da conduta para maximizar a efetividade da terapia.',
+    aplicabilidade:'Aplica-se a pacientes hospitalizados ou em acompanhamento ambulatorial com indicação clínica de SNO, sob prescrição e monitoramento exclusivo do nutricionista, em conformidade com a CFN Resolução 600/2018.',
+    materiais:['Avaliação nutricional atualizada com diagnóstico nutricional (NRS-2002 / ASG / MAN)','Cálculo de necessidades calórico-proteicas individuais','Cardápio de suplementos disponíveis na instituição (hipercalórico, hiperproteico, para diabéticos, para disfagia)','Formulário de monitoramento de aceitação e sintomas GI (impresso ou digital)','Prontuário eletrônico para registro da prescrição e evolução','Tabela de composição nutricional dos suplementos disponíveis (calorias, proteínas, osmolaridade)','Escala visual analógica de aceitação (0–100%)'],
+    passos:['Confirmar o diagnóstico nutricional: ingestão oral < 60% das necessidades por ≥ 5 dias, desnutrição leve/moderada/grave, aumento das necessidades por catabolismo, pré ou pós-operatório de grande porte.','Verificar contraindicações ao SNO: disfagia grave sem adaptação de consistência (comunicar fonoaudiologia), intolerâncias alimentares (lactose, glúten), alergias, via oral contraindicada (obstrução, íleo paralítico).','Selecionar a fórmula adequada ao diagnóstico: hipercalórico (≥1,5 kcal/mL) para restrição hídrica; hiperproteico para cicatrização/sarcopenia; específica para diabetes (menor índice glicêmico); néctar/mel/pudim para disfagia; pediátrica para menores de 10 anos.','Calcular o volume diário necessário para complementar a ingestão oral e atingir 100% das necessidades calórico-proteicas: [meta calórica total] − [ingestão oral estimada] = [volume de SNO indicado].','Prescrever no prontuário: nome comercial do suplemento, sabor disponível (oferecer opção ao paciente), volume por tomada, número de tomadas ao dia, horários (preferencialmente entre refeições ou ao deitar) e duração prevista.','Orientar paciente e familiar de forma clara: o SNO é um COMPLEMENTO — não substitui as refeições; tomar entre as refeições principais ou ao deitar; armazenar em geladeira após aberto; consumir em até 24h; informar ao nutricionista qualquer sintoma.','Monitorar aceitação nas primeiras 48–72h: registrar volume efetivamente consumido (mL/dia); perguntar sobre preferência de sabor, temperatura e horário; avaliar aceitação em escala 0–100%.','Avaliar sintomas gastrointestinais ativamente a cada visita: náusea (↓ volume por tomada ou trocar para fórmula menos osmolar), distensão abdominal (fracionar em mais tomadas), diarreia (avaliar fórmula com fibras ou osmolaridade), saciedade precoce (reduzir volume e aumentar frequência).','Ajustar a prescrição conforme resposta: trocar sabor, reduzir volume por tomada, fracionar em mais momentos, trocar fórmula se intolerância persistir após 72h.','Reavaliar semanalmente: se ingestão oral atingir ≥ 75% das necessidades por 3 dias consecutivos, iniciar desmame gradual e registrar suspensão com justificativa.'],
+    criticos:['SNO NUNCA substitui refeições — deve ser prescrito ENTRE as refeições principais para não competir com a ingestão alimentar e agravar a anorexia.','Em pacientes com disfagia: validar SEMPRE com fonoaudiologia a consistência adequada antes de indicar SNO via oral — risco de broncoaspiração.','Aceitação < 50% do volume prescrito por 3 dias consecutivos = falha da terapia oral; reavaliar indicação de transição para nutrição enteral e comunicar médico e EMTN.','Verificar interações: suplementos com alta carga de vitamina K podem interferir em anticoagulantes (varfarina); comunicar ao médico assistente.','Não indicar SNO em pacientes em nutrição enteral ou parenteral exclusiva sem plano de transição documentado.'],
+    normas:'CFN Resolução 600/2018 (atribuições privativas do nutricionista) · Diretrizes BRASPEN/SBNEP 2023 · RDC ANVISA 18/2013 (alimentos para fins especiais) · Consenso Brasileiro de Nutrição Oncológica (quando aplicável)' },
+  ip:{ entradas:['Diagnóstico nutricional com ingestão oral insuficiente (< 60% das necessidades)','Cardápio de suplementos disponíveis no estoque institucional','Ausência de contraindicação à via oral confirmada pela equipe multidisciplinar'],
+    atividades:['Avaliação critérios de indicação e seleção da fórmula adequada','Cálculo do volume complementar para atingir 100% das necessidades','Prescrição no prontuário e orientação detalhada ao paciente e familiar','Monitoramento de aceitação (volume consumido/dia) e sintomas GI nas primeiras 48–72h','Ajuste de fórmula, sabor, volume ou fracionamento conforme resposta clínica','Reavaliação semanal e suspensão quando critérios de alta nutricional forem atingidos'],
+    saidas:['Prescrição de SNO registrada no prontuário com justificativa clínica e CRN','Paciente e familiar orientados com linguagem acessível sobre uso correto','Monitoramento documentado com volume consumido, aceitação e sintomas GI','Ajuste ou suspensão do SNO registrados com data e justificativa'],
+    indicadores:['% de pacientes com SNO e prescrição documentada no prontuário (meta: 100%)','Taxa de aceitação do SNO — volume consumido / volume prescrito (meta: ≥ 70%)','% de pacientes com sintomas GI identificados e com conduta registrada em ≤ 48h (meta: 100%)','% de pacientes com monitoramento semanal documentado (meta: 100%)'],
+    responsabilidades:['Nutricionista: indicação, prescrição, orientação, monitoramento, ajuste e suspensão do SNO','Enfermagem: oferta do suplemento no horário prescrito e registro do volume efetivamente consumido','Farmácia / Estoque de Nutrição: disponibilidade dos suplementos prescritos e controle de estoque','Fonoaudiologia: validação da consistência adequada em pacientes com disfagia','Médico assistente: validação em casos de interações medicamentosas ou comorbidades limitantes'],
+    registros:['Prescrição de SNO no prontuário eletrônico com nome, fórmula, volume, horário e CRN','Formulário diário de monitoramento: volume consumido (mL), aceitação (%), sintomas GI e conduta','Registro de orientação ao paciente/familiar com data e assinatura','Nota de suspensão com justificativa clínica e data'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Déficit nutricional identificado'},{tipo:'processo',label:'Confirmar diagnóstico nutricional',sub:'Ingestão < 60% por ≥ 5 dias'},{tipo:'decisao',label:'Contraindicação à via oral?',sub:'Disfagia grave · obstrução · íleo'},{tipo:'processo',label:'Comunicar médico e EMTN',sub:'Avaliar nutrição enteral'},{tipo:'processo',label:'Selecionar fórmula adequada',sub:'Hipercalórico · hiperproteico · específica'},{tipo:'processo',label:'Calcular volume complementar',sub:'Meta calórica − ingestão oral'},{tipo:'processo',label:'Prescrever e orientar paciente',sub:'Entre refeições · horário · armazenamento'},{tipo:'processo',label:'Monitorar aceitação em 48–72h',sub:'Volume consumido (mL) · escala 0–100%'},{tipo:'decisao',label:'Sintomas GI presentes?',sub:'Náusea · distensão · diarreia'},{tipo:'processo',label:'Ajustar volume, fórmula ou fracionamento',sub:'Registrar conduta em ≤ 48h'},{tipo:'decisao',label:'Ingestão oral ≥ 75% por 3 dias?',sub:'Critério de suspensão'},{tipo:'processo',label:'Suspender SNO com registro',sub:'Justificativa + data no prontuário'},{tipo:'fim',label:'FIM',sub:'Alta nutricional ou mudança de via'}],
+  fmea:[{etapa:'Indicação',falha:'SNO prescrito sem diagnóstico nutricional formal documentado',efeito:'Uso irracional, desperdício e ausência de rastreabilidade',causa:'Indicação por rotina sem avaliação individualizada',acao:'Obrigatoriedade de diagnóstico nutricional registrado antes da prescrição; auditoria mensal',g:5,o:6,d:5},{etapa:'Seleção da fórmula',falha:'Fórmula com lactose para paciente intolerante',efeito:'Sintomas GI (diarreia, distensão) e abandono do SNO',causa:'Anamnese alimentar incompleta; não investigação de intolerâncias',acao:'Campo obrigatório de intolerâncias e alergias na anamnese; checklist de seleção',g:6,o:5,d:4},{etapa:'Disfagia',falha:'SNO em consistência inadequada para disfágico',efeito:'Broncoaspiração e pneumonia aspirativa',causa:'Ausência de comunicação entre nutrição e fonoaudiologia',acao:'Validação obrigatória da fonoaudiologia antes de indicar SNO oral em pacientes com disfagia',g:9,o:4,d:3},{etapa:'Horário de oferta',falha:'SNO ofertado junto às refeições principais',efeito:'Saciedade precoce e redução da ingestão alimentar',causa:'Enfermagem não orientada sobre o horário correto',acao:'Horário prescrito no mapa de dietas; treinamento da equipe de enfermagem',g:6,o:6,d:4},{etapa:'Monitoramento de sintomas GI',falha:'Sintomas GI não investigados na visita beira leito',efeito:'Abandono do SNO sem intervenção; piora nutricional',causa:'Visita sem roteiro estruturado de perguntas ao paciente',acao:'Incluir pergunta ativa sobre sintomas GI no roteiro da visita; formulário de monitoramento',g:7,o:6,d:5},{etapa:'Suspensão',falha:'SNO mantido após ingestão oral ≥ 75% por 3 dias',efeito:'Custo desnecessário e saciedade que prejudica a alimentação',causa:'Ausência de critério de suspensão definido e monitorado',acao:'Critério de suspensão explícito no protocolo; reavaliação semanal documentada',g:4,o:6,d:6}]
+},
+
+visitaleito: {
+  meta:{ code:'POP-NUT-002', rev:'Rev. 01', title:'Visita Beira Leito do Nutricionista', setor:'Nutrição Clínica / Internação', resp:'Nutricionista Responsável', norma:'CFN Res. 600/2018 · Protocolo EMTN · Diretrizes BRASPEN', freq:'semestral',
+    obj:'Realizar avaliação nutricional periódica à beira do leito, monitorar a evolução clínico-nutricional e ajustar a conduta dietética conforme o quadro do paciente internado.',
+    desc:'Identificação do paciente · Consulta ao prontuário eletrônico · Avaliação clínica e nutricional · Verificação da aceitação alimentar · Ajuste da prescrição dietética · Orientação ao paciente e familiar · Registro em prontuário · Participação em rounds multidisciplinares' },
+  it:{ objetivo:'Padronizar a rotina de visita beira leito do nutricionista, garantindo monitoramento contínuo do estado nutricional do paciente hospitalizado e adequação da terapia dietética de forma segura e individualizada.',
+    aplicabilidade:'Aplica-se a todos os pacientes em acompanhamento nutricional nas unidades de internação, realizando-se no mínimo uma vez por semana ou conforme o quadro clínico.',
+    materiais:['Prontuário eletrônico (tablet ou computador no quarto/posto)','Fita métrica e balança (quando possível pesar o paciente)','Formulário de evolução nutricional','Escala de aceitação alimentar (0–100% ou visual analógica)','EPIs: jaleco, crachá de identificação, álcool gel','Material educativo para orientação ao paciente/familiar'],
+    passos:['Higienizar as mãos antes de entrar no quarto (POP-INF-001).','Apresentar-se ao paciente e acompanhante; confirmar identificação com dois identificadores.','Consultar o prontuário: evolução médica, novos exames, alterações de conduta, intercorrências do período.','Avaliar sinais clínicos de desnutrição: edema, ascite, perda muscular visível, condição da pele e cabelos.','Verificar aceitação alimentar das últimas 24h (percentual consumido); checar reclamações sobre sabor, temperatura e textura.','Avaliar via de alimentação atual (oral, enteral, parenteral) e tolerância gastrointestinal.','Verificar peso corporal atual ou estimado; comparar com peso anterior e calcular variação percentual.','Revisar a prescrição dietética: adequação calórico-proteica, consistência e volumes. Ajustar se necessário.','Orientar paciente e familiar sobre a importância da alimentação no processo de recuperação; esclarecer dúvidas.','Registrar evolução nutricional no prontuário com avaliação atual, conduta e plano para a próxima visita.','Comunicar ao médico e equipe de enfermagem alterações relevantes identificadas na visita.'],
+    criticos:['NUNCA ajustar via de nutrição enteral ou parenteral sem comunicação prévia ao médico assistente.','Aceitação alimentar < 25% por mais de 3 dias consecutivos exige notificação imediata à EMTN e reavaliação do suporte nutricional.','Identificar sinais de disfagia (engasgos, tosse, voz molhada) e comunicar imediatamente à fonoaudiologia.','Manter confidencialidade das informações do paciente; não discutir casos em corredores.'],
+    normas:'CFN Resolução 600/2018 · Diretrizes BRASPEN/SBNEP · Protocolo EMTN institucional · Código de Ética do Nutricionista (CFN)' },
+  ip:{ entradas:['Lista de pacientes em acompanhamento nutricional por setor','Prontuário eletrônico atualizado com evolução médica e exames','Dados de aceitação alimentar registrados pela enfermagem'],
+    atividades:['Consulta ao prontuário antes da visita (evolução, exames, intercorrências)','Visita ao leito com avaliação clínica e nutricional','Verificação da aceitação alimentar e tolerância da dieta atual','Ajuste da prescrição dietética conforme necessidade','Orientação ao paciente/familiar e registro em prontuário'],
+    saidas:['Evolução nutricional registrada no prontuário com data, avaliação e conduta','Prescrição dietética ajustada conforme estado nutricional atual','Comunicação de alterações relevantes à equipe multidisciplinar','Encaminhamento para fonoaudiologia, EMTN ou outros serviços quando indicado'],
+    indicadores:['% de pacientes visitados semanalmente (meta: 100% dos acompanhamentos)','Tempo médio entre visitas (meta: ≤7 dias em internação clínica)','% de pacientes com aceitação < 25% com plano de ação documentado (meta: 100%)','Taxa de ajuste de conduta nas visitas (monitoramento mensal)'],
+    responsabilidades:['Nutricionista: realizar visita, avaliar, ajustar conduta e registrar no prazo','Enfermagem: registrar diariamente aceitação alimentar e comunicar intercorrências','Médico: informar mudanças clínicas relevantes que impactem a dieta','EMTN: supervisionar casos de terapia nutricional especializada','Fonoaudiologia: avaliação de disfagia quando solicitada'],
+    registros:['Evolução nutricional no prontuário eletrônico com CRN e assinatura','Formulário de aceitação alimentar diária (pela enfermagem)','Registro de encaminhamentos realizados na visita','Ata de rounds multidisciplinares (quando participar)'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Início do turno — visita programada'},{tipo:'processo',label:'Consultar prontuário antes da visita',sub:'Evolução · exames · intercorrências'},{tipo:'processo',label:'Higienizar mãos · entrar no quarto',sub:'POP-INF-001'},{tipo:'processo',label:'Confirmar identificação do paciente',sub:'2 identificadores'},{tipo:'processo',label:'Avaliação clínica e nutricional',sub:'Sinais clínicos · peso · via de alimentação'},{tipo:'processo',label:'Verificar aceitação alimentar 24h',sub:'Percentual consumido'},{tipo:'decisao',label:'Aceitação < 25%?',sub:'Por ≥ 3 dias consecutivos'},{tipo:'processo',label:'Notificar EMTN e médico',sub:'Reavaliação do suporte nutricional'},{tipo:'processo',label:'Ajustar prescrição dietética',sub:'Calorias · proteínas · consistência'},{tipo:'processo',label:'Orientar paciente e familiar',sub:'Importância da alimentação'},{tipo:'processo',label:'Registrar evolução no prontuário',sub:'Avaliação · conduta · próxima visita'},{tipo:'fim',label:'FIM',sub:'Próxima visita em até 7 dias'}],
+  fmea:[{etapa:'Consulta pré-visita',falha:'Não consultar prontuário antes da visita',efeito:'Ajuste de dieta sem contexto clínico atualizado',causa:'Pressa; ausência de rotina estruturada',acao:'Checklist pré-visita obrigatório; prontuário aberto antes de entrar',g:7,o:5,d:4},{etapa:'Aceitação alimentar',falha:'Dado de aceitação não registrado pela enfermagem',efeito:'Avaliação imprecisa do estado nutricional',causa:'Sobrecarga da equipe de enfermagem',acao:'Formulário simplificado; treinamento conjunto com enfermagem',g:7,o:6,d:5},{etapa:'Disfagia',falha:'Sinais de disfagia não identificados na visita',efeito:'Broncoaspiração com risco de pneumonia',causa:'Não observação da deglutição durante a visita',acao:'Incluir avaliação de deglutição no roteiro da visita',g:9,o:4,d:5},{etapa:'Ajuste de dieta enteral',falha:'Ajuste de NE sem comunicação ao médico',efeito:'Conflito de conduta; risco ao paciente',causa:'Autonomia excessiva; falta de comunicação multidisciplinar',acao:'Protocolo de comunicação obrigatória ao médico antes de alterar NE',g:8,o:3,d:3},{etapa:'Registro',falha:'Evolução não registrada ou registrada tardiamente',efeito:'Falha na continuidade do cuidado nutricional',causa:'Número elevado de pacientes por nutricionista',acao:'Registro no leito ou imediatamente após a visita',g:6,o:5,d:4}]
+},
+
+suplementacao: {
+  meta:{ code:'POP-NUT-003', rev:'Rev. 01', title:'Indicação e Monitoramento de Suplementação Nutricional Oral', setor:'Nutrição Clínica', resp:'Nutricionista Responsável', norma:'CFN Res. 600/2018 · Diretrizes BRASPEN · RDC ANVISA 18/2013', freq:'anual',
+    obj:'Estabelecer critérios clínicos e nutricionais para indicação, prescrição e monitoramento de suplementos nutricionais orais (SNO) em pacientes hospitalizados ou ambulatoriais.',
+    desc:'Avaliação do estado nutricional · Critérios de indicação do SNO · Seleção do suplemento adequado · Prescrição e orientação · Monitoramento de aceitação e efetividade · Registro em prontuário · Critérios de suspensão' },
+  it:{ objetivo:'Padronizar os critérios de indicação, prescrição e monitoramento de suplementação nutricional oral (SNO), garantindo uso racional, seguro e efetivo conforme as necessidades clínicas e nutricionais individuais do paciente.',
+    aplicabilidade:'Aplica-se a pacientes hospitalizados ou em acompanhamento ambulatorial com indicação clínica de suplementação nutricional oral, sob prescrição e acompanhamento do nutricionista.',
+    materiais:['Avaliação nutricional atualizada (NRS-2002 / ASG / MAN)','Cálculo de necessidades calórico-proteicas do paciente','Cardápio de suplementos disponíveis no estoque hospitalar','Prontuário eletrônico para registro da prescrição','Formulário de monitoramento de aceitação do SNO','Tabela de composição nutricional dos suplementos disponíveis'],
+    passos:['Confirmar o diagnóstico nutricional: desnutrição leve/moderada/grave ou risco nutricional com ingestão < 60% das necessidades por mais de 5 dias.','Verificar critérios de indicação: ingestão oral insuficiente, aumento das necessidades por catabolismo, disfagia com adaptação de consistência, pré e pós-operatório de cirurgias de grande porte.','Avaliar contraindicações: intolerância à lactose/glúten (selecionar fórmula isenta), diabetes (fórmulas para diabéticos), alergias alimentares, disfagia grave (via oral contraindicada).','Selecionar o suplemento adequado: hipercalórico, hiperproteico, imunomodulador, específico para diabetes, disfagia (néctar/mel/pudim), ou pediátrico — conforme diagnóstico e tolerância.','Calcular volume e frequência para complementar a ingestão e atingir 100% das necessidades calórico-proteicas.','Prescrever no prontuário: nome comercial do suplemento, sabor (quando disponível), volume, horário e orientações de uso.','Orientar paciente e familiar: horário ideal (entre refeições ou ao deitar), temperatura preferida, não substituir refeições pelo suplemento.','Monitorar aceitação nas primeiras 48h: volume efetivamente consumido, sabor preferido, sintomas gastrointestinais (náusea, distensão, diarreia).','Reavaliar necessidade semanalmente: suspender quando ingestão oral atingir ≥75% das necessidades por 3 dias consecutivos.','Registrar prescrição, ajustes e resposta ao SNO em todas as evoluções nutricionais.'],
+    criticos:['SNO não substitui refeições — deve ser oferecido ENTRE as refeições ou ao deitar para não comprometer a ingestão alimentar.','Em pacientes com disfagia: verificar consistência do suplemento com a fonoaudiologia antes de indicar — risco de broncoaspiração.','Não indicar SNO em pacientes com nutrição enteral ou parenteral exclusiva sem avaliação de transição.','Verificar interações medicamentosas: alguns suplementos interferem na absorção de antibióticos e anticoagulantes.'],
+    normas:'CFN Resolução 600/2018 · Diretrizes BRASPEN/SBNEP 2023 · RDC ANVISA 18/2013 (alimentos para fins especiais) · Consenso Brasileiro de Nutrição Oncológica (quando aplicável)' },
+  ip:{ entradas:['Diagnóstico nutricional confirmado com indicação de SNO','Cardápio de suplementos disponíveis no estoque institucional','Prescrição dietética atual e cálculo de necessidades calórico-proteicas'],
+    atividades:['Avaliação dos critérios clínicos e nutricionais de indicação','Seleção do suplemento adequado ao diagnóstico e tolerância','Cálculo de volume e frequência para complementar as necessidades','Orientação ao paciente/familiar sobre uso correto do SNO','Monitoramento de aceitação e ajuste da prescrição quando necessário'],
+    saidas:['Prescrição do SNO registrada no prontuário com justificativa clínica','Paciente e familiar orientados sobre uso, horário e objetivo do suplemento','Monitoramento semanal documentado com volume consumido e resposta clínica','Suspensão documentada quando critérios de retirada forem atingidos'],
+    indicadores:['% de pacientes com SNO indicado e prescrição documentada (meta: 100%)','Taxa de aceitação do SNO (meta: ≥70% do volume prescrito)','% de pacientes com monitoramento semanal documentado (meta: 100%)','Custo médio de SNO por paciente-dia (controle mensal)'],
+    responsabilidades:['Nutricionista: indicação, prescrição, monitoramento e registro do SNO','Enfermagem: oferta do suplemento no horário correto e registro do volume consumido','Farmácia/Estoque: disponibilidade dos suplementos prescritos e controle de estoque','Fonoaudiologia: validação da consistência em pacientes com disfagia','Médico: validação da indicação em casos de interações medicamentosas'],
+    registros:['Prescrição do SNO no prontuário eletrônico com CRN','Formulário de monitoramento de aceitação (volume consumido/dia)','Registro de orientação ao paciente/familiar','Nota de suspensão com justificativa quando critérios atingidos'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Paciente com déficit nutricional identificado'},{tipo:'processo',label:'Confirmar diagnóstico nutricional',sub:'NRS-2002 · ASG · Ingestão < 60%'},{tipo:'decisao',label:'Critérios de indicação de SNO?',sub:'Ingestão insuficiente · catabolismo · cirurgia'},{tipo:'processo',label:'Verificar contraindicações',sub:'Intolerâncias · alergias · disfagia grave'},{tipo:'processo',label:'Selecionar suplemento adequado',sub:'Hipercalórico · hiperproteico · específico'},{tipo:'processo',label:'Calcular volume e frequência',sub:'Complementar 100% das necessidades'},{tipo:'processo',label:'Prescrever e orientar',sub:'Horário · volume · entre as refeições'},{tipo:'processo',label:'Monitorar aceitação em 48h',sub:'Volume consumido · tolerância GI'},{tipo:'decisao',label:'Ingestão oral ≥ 75%?',sub:'Por 3 dias consecutivos'},{tipo:'processo',label:'Suspender SNO com documentação',sub:'Registro da alta do suporte'},{tipo:'processo',label:'Manter e reavaliar semanalmente',sub:'Ajustar sabor · volume · fórmula'},{tipo:'fim',label:'FIM',sub:'Alta nutricional ou mudança de via'}],
+  fmea:[{etapa:'Indicação',falha:'SNO indicado sem diagnóstico nutricional formal',efeito:'Uso irracional e desperdício de recursos',causa:'Indicação por rotina sem avaliação individualizada',acao:'Obrigatoriedade de diagnóstico nutricional documentado antes da indicação',g:5,o:6,d:5},{etapa:'Seleção da fórmula',falha:'Suplemento com lactose para intolerante',efeito:'Sintomas gastrointestinais e não adesão',causa:'Anamnese alimentar incompleta',acao:'Campo obrigatório de intolerâncias na anamnese',g:6,o:5,d:4},{etapa:'Disfagia',falha:'SNO em consistência inadequada para disfágico',efeito:'Broncoaspiração e pneumonia aspirativa',causa:'Não comunicação entre nutrição e fonoaudiologia',acao:'Validação obrigatória da fonoaudiologia antes de indicar SNO oral em disfágicos',g:9,o:4,d:4},{etapa:'Horário de oferta',falha:'SNO oferecido durante as refeições principais',efeito:'Redução da ingestão alimentar por saciedade precoce',causa:'Equipe de enfermagem não orientada sobre o horário',acao:'Treinamento da enfermagem; horário prescrito no mapa de dietas',g:6,o:6,d:4},{etapa:'Monitoramento',falha:'Volume consumido não registrado pela enfermagem',efeito:'Avaliação da efetividade impossível',causa:'Formulário de controle indisponível ou não preenchido',acao:'Formulário disponível no leito; treinamento e supervisão',g:5,o:7,d:5}]
+},
+
+aceitacao: {
+  meta:{ code:'POP-NUT-004', rev:'Rev. 01', title:'Controle e Monitoramento da Aceitação de Dieta Hospitalar', setor:'Nutrição Clínica / Enfermagem', resp:'Nutricionista e Equipe de Enfermagem', norma:'CFN Res. 600/2018 · Diretrizes BRASPEN · Protocolo EMTN', freq:'semestral',
+    obj:'Monitorar sistematicamente a aceitação alimentar dos pacientes internados, identificando precocemente situações de ingestão insuficiente e subsidiando ajustes na terapia dietética.',
+    desc:'Registro da aceitação por refeição · Escala visual ou percentual · Critérios de alerta · Comunicação ao nutricionista · Intervenções nutricionais · Registro em prontuário · Indicadores mensais' },
+  it:{ objetivo:'Padronizar o monitoramento da aceitação alimentar dos pacientes hospitalizados, garantindo identificação precoce de ingestão insuficiente e intervenção nutricional oportuna, reduzindo o risco de deterioração do estado nutricional.',
+    aplicabilidade:'Aplica-se a todos os pacientes em dieta oral internados nas unidades clínicas e cirúrgicas, sendo executado pela equipe de enfermagem a cada refeição e consolidado pelo nutricionista na visita beira leito.',
+    materiais:['Formulário de controle de aceitação alimentar (impresso ou digital)','Escala visual de aceitação (0%, 25%, 50%, 75%, 100%)','Prontuário eletrônico para registro e comunicação','Tabela de referência das metas calórico-proteicas por paciente','Caneta ou tablet para registro no momento da coleta das bandejas'],
+    passos:['Auxiliar de nutrição ou técnico de enfermagem: observar e registrar o percentual consumido de cada componente da bandeja NO MOMENTO da coleta (não estimar após retirada).','Utilizar a escala padronizada: 0% = nada consumido; 25% = menos de ¼; 50% = metade; 75% = mais de ¾; 100% = consumo total.','Registrar separadamente: prato principal, guarnição, salada, sobremesa, sopa e líquidos — não registrar apenas como "aceitação geral".','Perguntar ao paciente sobre motivos da baixa aceitação: náusea, dor, sabor, temperatura, textura inadequada, restrição por exame ou jejum.','Comunicar imediatamente ao nutricionista quando aceitação for < 25% em qualquer refeição principal (almoço ou jantar).','Nutricionista: avaliar o padrão de aceitação nas últimas 24-72h; calcular ingestão calórica e proteica real versus necessidades.','Intervir conforme o nível de aceitação: ajuste de consistência, fracionamento de refeições, adequação do cardápio, indicação de SNO ou transição para terapia enteral.','Registrar a aceitação diária no prontuário eletrônico com análise do nutricionista e conduta adotada.','Calcular indicador mensal: % de pacientes com aceitação < 50% por setor — apresentar em reunião de qualidade.'],
+    criticos:['O registro deve ser feito NO MOMENTO da coleta da bandeja — estimativas posteriores são imprecisas e comprometem as decisões clínicas.','Aceitação < 25% por 3 dias consecutivos = critério de alerta máximo: acionar EMTN e discutir suporte nutricional especializado.','Não confundir jejum prescrito com baixa aceitação — registrar a causa corretamente para não distorcer os indicadores.','O formulário de aceitação é documento clínico — deve ter data, hora, refeição e identificação de quem registrou.'],
+    normas:'CFN Resolução 600/2018 · Diretrizes BRASPEN/SBNEP · Protocolo EMTN institucional · ONA (Organização Nacional de Acreditação) — Indicadores de Nutrição' },
+  ip:{ entradas:['Paciente em dieta oral com bandeja entregue','Formulário de controle de aceitação disponível no leito','Meta calórico-proteica definida pelo nutricionista'],
+    atividades:['Registro do percentual consumido por componente a cada refeição','Identificação dos motivos de baixa aceitação','Comunicação ao nutricionista quando aceitação < 25%','Análise diária do padrão de aceitação pelo nutricionista','Intervenção nutricional e registro da conduta no prontuário'],
+    saidas:['Formulário de aceitação preenchido a cada refeição','Cálculo diário da ingestão calórica e proteica real','Conduta nutricional documentada no prontuário','Indicador mensal de aceitação por setor para reunião de qualidade'],
+    indicadores:['% de pacientes com aceitação ≥ 75% (meta institucional)','% de registros de aceitação preenchidos (meta: ≥95% das refeições)','Tempo entre alerta de baixa aceitação e intervenção nutricional (meta: ≤24h)','Taxa de pacientes com aceitação < 50% por setor (monitoramento mensal)'],
+    responsabilidades:['Aux. de Nutrição / Técnico de Enfermagem: registro da aceitação a cada refeição','Nutricionista: análise diária, cálculo de ingestão real e intervenção','Enfermagem: comunicação de intercorrências que afetam a aceitação (náusea, vômito, dor)','EMTN: avaliação de casos com aceitação cronicamente insuficiente','Gestão de Nutrição: análise dos indicadores mensais e plano de melhoria'],
+    registros:['Formulário de aceitação alimentar diária por refeição (arquivado no prontuário)','Evolução nutricional com análise da aceitação e conduta','Relatório mensal de indicadores de aceitação por setor','Ata de reunião de qualidade com apresentação dos dados'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Bandeja entregue ao paciente'},{tipo:'processo',label:'Observar consumo por componente',sub:'Prato · guarnição · salada · sopa · líquido'},{tipo:'processo',label:'Registrar percentual na escala',sub:'0% · 25% · 50% · 75% · 100%'},{tipo:'processo',label:'Anotar motivo da baixa aceitação',sub:'Náusea · dor · sabor · jejum...'},{tipo:'decisao',label:'Aceitação < 25%?',sub:'Em refeição principal'},{tipo:'processo',label:'Comunicar ao nutricionista',sub:'Imediatamente'},{tipo:'processo',label:'Nutricionista avalia padrão 24-72h',sub:'Calcula ingestão real vs. meta'},{tipo:'decisao',label:'Aceitação < 25% por 3 dias?',sub:'Critério de alerta máximo'},{tipo:'processo',label:'Acionar EMTN',sub:'Discutir suporte nutricional especializado'},{tipo:'processo',label:'Intervir: ajuste de dieta / SNO',sub:'Consistência · fracionamento · suplemento'},{tipo:'processo',label:'Registrar conduta no prontuário',sub:'Com data · hora · CRN'},{tipo:'fim',label:'FIM',sub:'Reavaliar a cada refeição'}],
+  fmea:[{etapa:'Registro',falha:'Aceitação estimada após retirada da bandeja',efeito:'Dado impreciso; decisão clínica incorreta',causa:'Pressa; registro posterior à coleta',acao:'Treinamento: registrar NO MOMENTO; supervisão diária',g:7,o:8,d:5},{etapa:'Escala',falha:'Registro genérico sem separar componentes',efeito:'Não identificação do componente deficiente na dieta',causa:'Formulário complexo ou não compreendido',acao:'Formulário simplificado com imagem visual; treinamento',g:5,o:7,d:5},{etapa:'Comunicação',falha:'Alerta de baixa aceitação não comunicado ao nutricionista',efeito:'Intervenção atrasada; piora do estado nutricional',causa:'Falta de protocolo claro de comunicação',acao:'Fluxo de comunicação escrito com prazo máximo de 2h',g:8,o:5,d:4},{etapa:'Causa da baixa aceitação',falha:'Motivo não investigado junto ao paciente',efeito:'Intervenção inadequada; persistência do problema',causa:'Registro mecânico sem abordagem ao paciente',acao:'Campo obrigatório de motivo no formulário; capacitação',g:6,o:6,d:4},{etapa:'Indicadores',falha:'Dados não consolidados mensalmente',efeito:'Falha na gestão da qualidade nutricional',causa:'Ausência de rotina de consolidação de dados',acao:'Responsável definido para consolidação mensal; prazo fixo',g:5,o:5,d:5}]
+},
+
+enteral: {
+  meta:{ code:'POP-NUT-005', rev:'Rev. 02', title:'Preparo e Administração de Dieta Enteral Industrializada', setor:'Lactário / UTI / Internação', resp:'Nutricionista e Técnico de Nutrição', norma:'RDC ANVISA 63/2000 · CFN Res. 600/2018 · Protocolo EMTN · BPF', freq:'anual',
+    obj:'Garantir o preparo, armazenamento e administração seguros da dieta enteral industrializada, prevenindo contaminação microbiológica e erros de identificação que comprometam a segurança do paciente.',
+    desc:'Paramentação e higienização · Verificação da fórmula prescrita · Preparo no lactário · Identificação e rotulagem · Armazenamento e transporte · Administração e monitoramento · Registro de intercorrências · Descarte correto' },
+  it:{ objetivo:'Padronizar o preparo e administração da dieta enteral industrializada, garantindo a segurança microbiológica, a identificação correta do paciente e fórmula, e a prevenção de complicações decorrentes da terapia nutricional enteral.',
+    aplicabilidade:'Aplica-se a todos os pacientes em terapia nutricional enteral (TNE) internados, sendo executado pelo técnico de nutrição no lactário e pela equipe de enfermagem nas unidades de internação e UTI.',
+    materiais:['Fórmula enteral industrializada conforme prescrição do nutricionista','Frasco/bolsa de dieta enteral estéril de uso único','Bomba de infusão enteral com equipo específico (não usar equipo de soro)','Etiqueta de identificação impressa com dados completos','Luvas, jaleco e gorro (paramentação do lactário)','Álcool gel 70% e álcool 70% para desinfecção de superfícies','Geladeira exclusiva para dietas enterais (2–8°C)','Checklist de controle de temperatura e produção'],
+    passos:['LACTÁRIO — PREPARO: Realizar higienização das mãos e paramentar-se (jaleco, gorro, máscara, luvas) antes de entrar na área de preparo.','Verificar no sistema a prescrição: nome do paciente, leito, fórmula, volume total, taxa de infusão e horário de início.','Conferir o rótulo da fórmula: nome comercial, número de lote, validade, integridade da embalagem e aspecto do produto.','Preparar em área limpa, desinfetada com álcool 70%; utilizar utensílios exclusivos e estéreis para dieta enteral.','Identificar imediatamente a bolsa/frasco preparado com etiqueta contendo: nome completo do paciente, nº do leito, fórmula, volume, data e hora do preparo, validade de uso (máximo 24h refrigerado ou 4h em temperatura ambiente) e nome do técnico responsável.','Armazenar refrigerado (2–8°C) até o momento da administração; transportar em caixa térmica se a unidade for distante.','UNIDADE — ADMINISTRAÇÃO: Enfermagem higieniza as mãos; confere identificação do paciente (2 identificadores) e da etiqueta da dieta antes de conectar.','Conectar o equipo exclusivo de enteral (NUNCA equipo de soro — conexão diferente para prevenir erro de via); programar a bomba conforme taxa prescrita.','Verificar posicionamento da sonda antes de iniciar: aspirar e confirmar pH gástrico < 5,5 ou checar via imagem quando indicado.','Monitorar a cada 4h: volume infundido, sinais de intolerância (distensão, náusea, vômito, diarreia), temperatura do paciente e permeabilidade da sonda.','Registrar no prontuário: volume administrado, intercorrências e conduta adotada.','Descartar todo o volume não administrado após 4h em temperatura ambiente; bolsa refrigerada: descarte após 24h.'],
+    criticos:['NUNCA conectar dieta enteral em acesso venoso — usar conectores Luer Lock exclusivos para enteral (cor diferente); erro pode ser fatal.','Bolsa identificada incorretamente ou sem identificação: NUNCA administrar — devolver ao lactário para reidentificação.','Sonda posicionada no pulmão: conferir via imagem antes do início, especialmente em pacientes inconscientes ou após mobilização.','Temperatura da dieta enteral: não aquecer em micro-ondas (aquecimento desigual); usar banho-maria ou aquecedor específico.'],
+    normas:'RDC ANVISA 63/2000 (regulamento técnico para TNE) · CFN Resolução 600/2018 · Protocolo EMTN institucional · Boas Práticas de Fabricação (BPF) em Lactário · Nota Técnica ANVISA Conectores Enteral' },
+  ip:{ entradas:['Prescrição de TNE no prontuário eletrônico assinada pelo nutricionista','Fórmula enteral disponível no estoque do lactário dentro da validade','Acesso enteral (SNG, SNE, gastrostomia) instalado e posicionado corretamente'],
+    atividades:['Verificação da prescrição e conferência dos dados da fórmula no lactário','Preparo asséptico e identificação completa da bolsa/frasco','Armazenamento refrigerado e transporte adequado até a unidade','Administração com bomba enteral e monitoramento a cada 4h','Registro de volumes, intercorrências e descarte correto dos resíduos'],
+    saidas:['Dieta enteral administrada com segurança no volume e taxa prescrita','Registro de volumes infundidos e intercorrências no prontuário','Descarte correto de sobras dentro do prazo de validade','Indicador mensal de complicações da TNE (diarreia, distensão, refluxo)'],
+    indicadores:['% de bolsas de dieta enteral com identificação completa (meta: 100%)','Taxa de complicações gastrointestinais da TNE (meta: ≤15%)','% de checagens de posicionamento de sonda documentadas (meta: 100%)','Volume prescrito vs. volume administrado (meta: ≥90% do prescrito)'],
+    responsabilidades:['Técnico de Nutrição (lactário): preparo asséptico e identificação completa','Nutricionista: prescrição, ajustes e monitoramento nutricional da TNE','Enfermagem: administração, monitoramento de intercorrências e registro de volumes','EMTN: supervisão, protocolos e análise de complicações','Engenharia Clínica: manutenção das bombas de infusão enteral'],
+    registros:['Ficha de produção do lactário (diária — data, fórmula, lote, técnico responsável)','Checklist de temperatura da geladeira do lactário (2 vezes/dia)','Registro de volume administrado e intercorrências no prontuário','Formulário de notificação de erro de via (quando aplicável)'] },
+  fluxo:[{tipo:'inicio',label:'INÍCIO',sub:'Prescrição de TNE no prontuário'},{tipo:'processo',label:'Lactário: higienizar + paramentar',sub:'Jaleco · gorro · máscara · luvas'},{tipo:'processo',label:'Verificar prescrição e fórmula',sub:'Nome · fórmula · volume · validade'},{tipo:'processo',label:'Preparar em área limpa e asséptica',sub:'Utensílios exclusivos de enteral'},{tipo:'processo',label:'Identificar a bolsa/frasco',sub:'Nome · leito · fórmula · data · validade'},{tipo:'processo',label:'Refrigerar (2–8°C) até administração',sub:'Transporte em caixa térmica'},{tipo:'processo',label:'Unidade: confirmar 2 identificadores',sub:'Paciente + etiqueta da dieta'},{tipo:'decisao',label:'Sonda posicionada corretamente?',sub:'pH < 5,5 ou confirmação por imagem'},{tipo:'processo',label:'NÃO administrar — reposicionar sonda',sub:'Comunicar médico e enfermeiro'},{tipo:'processo',label:'Conectar equipo ENTERAL exclusivo',sub:'NUNCA equipo de soro'},{tipo:'processo',label:'Programar bomba · monitorar a cada 4h',sub:'Volume · intolerância · permeabilidade'},{tipo:'fim',label:'FIM',sub:'Descartar após 4h (amb.) ou 24h (refrig.)'}],
+  fmea:[{etapa:'Identificação da bolsa',falha:'Bolsa sem identificação ou com dados incompletos',efeito:'Administração para paciente errado',causa:'Pressa no lactário; falta de etiqueta',acao:'Regra: não sai do lactário sem identificação completa; checklist de saída',g:9,o:4,d:3},{etapa:'Conexão',falha:'Dieta enteral conectada em acesso venoso',efeito:'Embolia; morte',causa:'Conectores iguais (antigos); confusão na urgência',acao:'Conectores Luer Lock exclusivos para enteral; nunca usar equipo de soro',g:10,o:2,d:2},{etapa:'Posicionamento de sonda',falha:'Não verificar posicionamento antes de iniciar',efeito:'Broncoaspiração; pneumonia aspirativa',causa:'Pressa; ausência de checklist',acao:'Checklist obrigatório de posicionamento antes de cada início de dieta',g:9,o:5,d:4},{etapa:'Temperatura',falha:'Aquecimento em micro-ondas',efeito:'Desnaturação de nutrientes e queimaduras',causa:'Desconhecimento; falta de aquecedor adequado',acao:'Banho-maria ou aquecedor específico; proibição explícita do micro-ondas',g:7,o:4,d:3},{etapa:'Validade',falha:'Administração de dieta após prazo de validade',efeito:'Contaminação microbiológica; sepse',causa:'Não verificação do horário de preparo',acao:'Horário limite de descarte na etiqueta; checklist da enfermagem a cada troca',g:8,o:3,d:4}]
+}
+
+};
+
+// ══════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════
+let pops = JSON.parse(localStorage.getItem('qualidadedoc_pops') || '[]');
+let currentTab = 'it';
+let editing = false;
+let generatedDocs = {};
+let currentMeta = {};
+let activeExample = null;
+
+document.getElementById('popDesc').addEventListener('input', function () {
+  document.getElementById('charCount').textContent = this.value.length + ' caracteres';
+});
+
+// ══════════════════════════════════════════════════════════════════
+// LOAD EXAMPLE
+// ══════════════════════════════════════════════════════════════════
+function loadExample(key) {
+  const p = POPS[key];
+  if (!p) return;
+  activeExample = key;
+  document.querySelectorAll('.ex-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('popCode').value  = p.meta.code;
+  document.getElementById('popRev').value   = p.meta.rev;
+  document.getElementById('popTitle').value = p.meta.title;
+  document.getElementById('popSetor').value = p.meta.setor;
+  document.getElementById('popResp').value  = p.meta.resp;
+  document.getElementById('popObj').value   = p.meta.obj;
+  document.getElementById('popDesc').value  = p.meta.desc;
+  document.getElementById('popNorma').value = p.meta.norma;
+  document.getElementById('popFreq').value  = p.meta.freq;
+  document.getElementById('charCount').textContent = p.meta.desc.length + ' caracteres';
+  currentMeta = { code:p.meta.code, rev:p.meta.rev, title:p.meta.title, setor:p.meta.setor, resp:p.meta.resp };
+  generatedDocs = { it:p.it, ip:p.ip, fluxo:p.fluxo, fmea:p.fmea };
+  renderIT(p.it, currentMeta);
+  renderIP(p.ip, currentMeta);
+  renderFluxo(p.fluxo, currentMeta);
+  renderFMEA(p.fmea, currentMeta);
+  revealToolbar();
+  switchTab('it');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════════════════════════════════════════════════════════════════
+// TAB / EDIT / COPY / PRINT / EXPORT
+// ══════════════════════════════════════════════════════════════════
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.doc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.doc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById(`panel-${tab}`).classList.add('active');
+}
+function toggleEdit() {
+  editing = !editing;
+  ['it','ip'].forEach(t => { const el=document.getElementById(`text-${t}`); if(el) el.contentEditable=editing?'true':'false'; });
+  document.getElementById('editBtn').textContent = editing ? '✅ Concluir edição' : '✏️ Editar';
+  document.getElementById('editBadge').style.display = editing ? 'inline-block' : 'none';
+}
+function copyDoc() {
+  const el = document.getElementById(`text-${currentTab}`);
+  if (!el) return;
+  navigator.clipboard.writeText(el.innerText || el.textContent).then(() => alert('Copiado!')).catch(() => alert('Selecione e copie manualmente.'));
+}
+function printDoc() { window.print(); }
+function exportDoc() {
+  const el = document.getElementById(`text-${currentTab}`);
+  if (!el) return;
+  const blob = new Blob([el.innerText || el.textContent], { type:'text/plain;charset=utf-8' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `${currentTab.toUpperCase()}_${document.getElementById('popCode').value||'doc'}.txt`; a.click();
+}
+function revealToolbar() { ['editBtn','copyBtn','printBtn','exportBtn'].forEach(id=>document.getElementById(id).style.display='inline-flex'); }
+function hideToolbar()   { ['editBtn','copyBtn','printBtn','exportBtn'].forEach(id=>document.getElementById(id).style.display='none'); }
+
+// ══════════════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════════════
+function renderIT(data, meta) {
+  document.getElementById('text-it').innerHTML = `
+    <div class="doc-header-block">
+      <div><div class="doc-type">Instrução de Trabalho</div><div class="doc-meta-small">${meta.setor} · ${meta.resp}</div></div>
+      <div style="text-align:right"><div class="doc-id">${meta.code.replace('POP','IT')}</div><div class="doc-meta-small" style="margin-top:3px">${meta.rev} · ${new Date().toLocaleDateString('pt-BR')}</div></div>
+    </div>
+    <div style="padding:14px 16px">
+      <div class="doc-section"><h4>1. Título</h4><p>${meta.title}</p></div>
+      <div class="doc-section"><h4>2. Objetivo</h4><p>${data.objetivo}</p></div>
+      <div class="doc-section"><h4>3. Aplicabilidade</h4><p>${data.aplicabilidade}</p></div>
+      <div class="doc-section"><h4>4. Materiais e EPIs necessários</h4><ul>${data.materiais.map(m=>`<li>${m}</li>`).join('')}</ul></div>
+      <div class="doc-section"><h4>5. Passo a passo</h4><ul>${data.passos.map((p,i)=>`<li><strong>${i+1}.</strong> ${p}</li>`).join('')}</ul></div>
+      <div class="doc-section"><h4>6. Pontos críticos de controle</h4><ul>${data.criticos.map(c=>`<li>⚠️ ${c}</li>`).join('')}</ul></div>
+      <div class="doc-section"><h4>7. Referências normativas</h4><p>${data.normas}</p></div>
+    </div>`;
+  document.getElementById('placeholder-it').style.display='none';
+  document.getElementById('content-it').style.display='block';
+  document.querySelector('[data-tab="it"]').classList.add('ready');
+}
+function renderIP(data, meta) {
+  document.getElementById('text-ip').innerHTML = `
+    <div class="doc-header-block">
+      <div><div class="doc-type">Instrução de Processo</div><div class="doc-meta-small">${meta.setor} · ${meta.resp}</div></div>
+      <div style="text-align:right"><div class="doc-id">${meta.code.replace('POP','IP')}</div><div class="doc-meta-small" style="margin-top:3px">${meta.rev} · ${new Date().toLocaleDateString('pt-BR')}</div></div>
+    </div>
+    <div style="padding:14px 16px">
+      <div class="doc-section"><h4>1. Processo</h4><p>${meta.title}</p></div>
+      <div class="doc-section"><h4>2. Entradas</h4><ul>${data.entradas.map(e=>`<li>${e}</li>`).join('')}</ul></div>
+      <div class="doc-section"><h4>3. Atividades principais</h4><ul>${data.atividades.map(a=>`<li>${a}</li>`).join('')}</ul></div>
+      <div class="doc-section"><h4>4. Saídas / Resultados esperados</h4><ul>${data.saidas.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+      <div class="doc-section"><h4>5. Indicadores de qualidade</h4><ul>${data.indicadores.map(i=>`<li>📊 ${i}</li>`).join('')}</ul></div>
+      <div class="doc-section"><h4>6. Responsabilidades</h4><ul>${data.responsabilidades.map(r=>`<li>${r}</li>`).join('')}</ul></div>
+      <div class="doc-section"><h4>7. Registros e evidências</h4><ul>${data.registros.map(r=>`<li>📝 ${r}</li>`).join('')}</ul></div>
+    </div>`;
+  document.getElementById('placeholder-ip').style.display='none';
+  document.getElementById('content-ip').style.display='block';
+  document.querySelector('[data-tab="ip"]').classList.add('ready');
+}
+function renderFluxo(etapas, meta) {
+  let html = `<div style="padding:10px 16px 2px;font-size:0.72rem;font-weight:700;color:var(--ink3);letter-spacing:0.6px;text-transform:uppercase">Fluxograma · ${meta.title}</div><div class="fluxo-box">`;
+  etapas.forEach((e,i) => {
+    const isFirst=i===0, isLast=i===etapas.length-1;
+    let cls='fluxo-step';
+    if(isFirst||isLast) cls+=' terminator'; else if(e.tipo==='decisao') cls+=' diamond';
+    html+=`<div class="${cls}">${e.label}${e.sub&&e.tipo!=='decisao'?`<div class="fluxo-sub">${e.sub}</div>`:''}</div>`;
+    if(i<etapas.length-1) html+=`<div class="fluxo-arrow">↓</div>`;
+  });
+  html+='</div>';
+  document.getElementById('text-fluxo').innerHTML=html;
+  document.getElementById('placeholder-fluxo').style.display='none';
+  document.getElementById('content-fluxo').style.display='block';
+  document.querySelector('[data-tab="fluxo"]').classList.add('ready');
+}
+function renderFMEA(itens, meta) {
+  let html=`<div style="padding:10px 16px 2px;font-size:0.72rem;font-weight:700;color:var(--ink3);letter-spacing:0.6px;text-transform:uppercase">FMEA · ${meta.title}</div>
+  <div class="fmea-wrap"><table class="fmea-table"><thead><tr>
+    <th>Etapa</th><th>Modo de Falha</th><th>Efeito</th><th>Causa</th><th>Ação Preventiva</th>
+    <th style="text-align:center">G</th><th style="text-align:center">O</th><th style="text-align:center">D</th><th style="text-align:center">RPN</th>
+  </tr></thead><tbody>`;
+  itens.forEach(item=>{
+    const rpn=item.g*item.o*item.d, cls=rpn>=200?'rpn-high':rpn>=100?'rpn-med':'rpn-low';
+    html+=`<tr><td>${item.etapa}</td><td>${item.falha}</td><td>${item.efeito}</td><td>${item.causa}</td><td>${item.acao}</td>
+      <td style="text-align:center">${item.g}</td><td style="text-align:center">${item.o}</td><td style="text-align:center">${item.d}</td>
+      <td style="text-align:center" class="rpn ${cls}">${rpn}</td></tr>`;
+  });
+  html+=`</tbody></table></div><div style="padding:5px 16px 10px;font-size:0.68rem;color:var(--ink3)">G=Gravidade · O=Ocorrência · D=Detecção (1–10) · <span class="rpn-high">■ Alto ≥200</span> <span class="rpn-med">■ Médio ≥100</span> <span class="rpn-low">■ Baixo &lt;100</span></div>`;
+  document.getElementById('text-fmea').innerHTML=html;
+  document.getElementById('placeholder-fmea').style.display='none';
+  document.getElementById('content-fmea').style.display='block';
+  document.querySelector('[data-tab="fmea"]').classList.add('ready');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// BIBLIOTECA
+// ══════════════════════════════════════════════════════════════════
+function getMeta(){ return { code:document.getElementById('popCode').value||'POP-???', rev:document.getElementById('popRev').value||'Rev.01', title:document.getElementById('popTitle').value||'Sem título', setor:document.getElementById('popSetor').value, resp:document.getElementById('popResp').value }; }
+function savePOP() {
+  const title=document.getElementById('popTitle').value.trim();
+  if(!title){alert('Preencha ao menos o título.');return;}
+  const pop={ id:Date.now(), ...getMeta(), obj:document.getElementById('popObj').value, desc:document.getElementById('popDesc').value, norma:document.getElementById('popNorma').value, freq:document.getElementById('popFreq').value, docs:generatedDocs, date:new Date().toLocaleDateString('pt-BR'), status:generatedDocs&&generatedDocs.it?'complete':'new' };
+  const idx=pops.findIndex(p=>p.code===pop.code);
+  if(idx>=0) pops[idx]=pop; else pops.push(pop);
+  localStorage.setItem('qualidadedoc_pops',JSON.stringify(pops));
+  renderPOPList();
+  alert(`✅ "${title}" salvo na biblioteca!`);
+}
+function loadPOP(id) {
+  const pop=pops.find(p=>p.id===id); if(!pop)return;
+  document.getElementById('popCode').value=pop.code; document.getElementById('popRev').value=pop.rev;
+  document.getElementById('popTitle').value=pop.title; document.getElementById('popSetor').value=pop.setor;
+  document.getElementById('popResp').value=pop.resp; document.getElementById('popObj').value=pop.obj;
+  document.getElementById('popDesc').value=pop.desc; document.getElementById('popNorma').value=pop.norma;
+  document.getElementById('popFreq').value=pop.freq;
+  document.getElementById('charCount').textContent=(pop.desc||'').length+' caracteres';
+  generatedDocs=pop.docs||{}; currentMeta=getMeta();
+  if(pop.docs){ if(pop.docs.it)renderIT(pop.docs.it,currentMeta); if(pop.docs.ip)renderIP(pop.docs.ip,currentMeta); if(pop.docs.fluxo)renderFluxo(pop.docs.fluxo,currentMeta); if(pop.docs.fmea)renderFMEA(pop.docs.fmea,currentMeta); if(pop.docs.it)revealToolbar(); }
+}
+function deletePOP(id,e) {
+  e.stopPropagation(); if(!confirm('Remover este POP?'))return;
+  pops=pops.filter(p=>p.id!==id); localStorage.setItem('qualidadedoc_pops',JSON.stringify(pops)); renderPOPList();
+}
+function clearForm() {
+  ['popCode','popRev','popTitle','popSetor','popResp','popObj','popDesc','popNorma'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('charCount').textContent='0 caracteres'; generatedDocs={};
+  document.querySelectorAll('.ex-btn').forEach(b=>b.classList.remove('active'));
+  ['it','ip','fluxo','fmea'].forEach(t=>{ document.getElementById(`placeholder-${t}`).style.display=''; document.getElementById(`content-${t}`).style.display='none'; document.querySelector(`[data-tab="${t}"]`).classList.remove('ready'); });
+  hideToolbar();
+}
+function renderPOPList() {
+  const el=document.getElementById('popList');
+  if(!pops.length){ el.innerHTML='<div style="text-align:center;padding:14px;color:var(--ink3);font-size:0.78rem">Nenhum POP salvo ainda.<br>Carregue um exemplo e salve!</div>'; return; }
+  el.innerHTML=pops.map(p=>`<div class="pop-item" onclick="loadPOP(${p.id})"><div><div class="pop-name">${p.code} — ${p.title}</div><div class="pop-meta">${p.setor||'—'} · ${p.date}</div></div><div style="display:flex;align-items:center;gap:6px"><span class="pop-status status-${p.status}">${p.status==='complete'?'✓ Completo':'Novo'}</span><button class="btn btn-sm" onclick="deletePOP(${p.id},event)" style="padding:2px 7px;font-size:0.66rem">✕</button></div></div>`).join('');
+}
+renderPOPList();
+</script>
+</body>
+</html>
